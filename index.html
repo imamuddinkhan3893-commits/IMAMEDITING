@@ -244,6 +244,24 @@ footer{
   height:42px;
   object-fit:contain;
   border-radius:50%;
+}.video-box{
+  position:relative;
+  width:100%;
+  cursor:pointer;
+  overflow:hidden;
+  border-radius:12px;
+  background:#000;
+}
+
+.video-box img{
+  width:100%;
+  display:block;
+}
+
+.project .video-box video{
+  width:100%;
+  display:none;
+  border-radius:12px;
 }
 </style>
 </head>
@@ -335,11 +353,16 @@ footer{
 
     <div class="project">
 
-  <video controls playsinline preload="metadata" poster="thumbnail%202.png">
-    <source src="ugc%20advertisement.mp4" type="video/mp4">
-    Your browser does not support video playback.
-  </video>
+  <div class="video-box" onclick="playVideo(event, this)">
+  <img src="thumbnail%201.png" alt="Advertisement Thumbnail">
 
+  <video playsinline preload="metadata">
+    <source src="ugc%20advertisement.mp4" type="video/mp4">
+  </video>
+</div>
+
+<h3>Brand Advertisement</h3>
+<p>Professional promotional video editing.</p>
   <h3>Brand Advertisement</h3>
   <p>Professional promotional video editing.</p>
 
@@ -347,10 +370,16 @@ footer{
 
 
 <div class="project" onclick="window.location.href='motion-graphics.html'" style="cursor:pointer;">
-<video controls playsinline preload="metadata" poster="thumbnail%201.png">
+<div class="video-box" onclick="playVideo(event, this)">
+  <img src="thumbnail%202.png" alt="Motion Graphics Thumbnail">
+
+  <video playsinline preload="metadata">
     <source src="Motion-graphic.mp4" type="video/mp4">
-    Your browser does not support video playback.
   </video>
+</div>
+
+<h3>Motion Graphics</h3>
+<p>View 3 motion graphics projects →</p>
 
   <h3>Motion Graphics</h3>
   <p>View 3 motion graphics projects →</p>
@@ -407,6 +436,20 @@ footer{
 <footer>
   © 2026 IMAMEDITING. All Rights Reserved.
 </footer>
+<script>
+function playVideo(event, box){
 
+  event.stopPropagation();
+
+  const thumbnail = box.querySelector("img");
+  const video = box.querySelector("video");
+
+  thumbnail.style.display = "none";
+  video.style.display = "block";
+
+  video.controls = true;
+  video.play();
+}
+    </script>
 </body>
   </html>
