@@ -204,3 +204,160 @@ h1{
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Motion Graphics | IMAMEDITING</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#080808;
+  color:white;
+}
+
+nav{
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #222;
+  position:sticky;
+  top:0;
+  background:rgba(8,8,8,.95);
+  z-index:10;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.back{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.container{
+  padding:45px 6%;
+}
+
+.number{
+  color:#555;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+h1{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:#888;
+  margin-bottom:30px;
+}
+
+.videos{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.video-card{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:12px;
+  overflow:hidden;
+}
+
+.video-card video{
+  width:100%;
+  display:block;
+  border-radius:12px;
+  background:#000;
+}
+
+.video-card h3{
+  font-size:16px;
+  margin:14px 5px 5px;
+}
+
+.video-card p{
+  color:#777;
+  font-size:13px;
+  margin:0 5px 8px;
+}
+
+@media(max-width:600px){
+  .videos{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">IMAMEDITING</div>
+  <a href="index.html#portfolio" class="back">← Back</a>
+</nav>
+
+<div class="container">
+
+  <div class="number">01 / MOTION GRAPHICS</div>
+
+  <h1>Motion Graphics</h1>
+
+  <p class="subtitle">
+    A collection of my motion graphics and visual effects work.
+  </p>
+
+  <div class="videos">
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="Motion-graphic.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphic 01</h3>
+      <p>Motion graphics and visual effects.</p>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="motion%20graphic%202.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphic 02</h3>
+      <p>Creative motion design.</p>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="motion%20graphic%203.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphic 03</h3>
+      <p>Modern visual animation.</p>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
