@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Motion Graphics | IMAMEDITING</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#080808;
+  color:white;
+}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(8,8,8,.95);
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #222;
+}
+
+.logo{
+  color:white;
+  text-decoration:none;
+  font-size:24px;
+  font-weight:700;
+}
+
+.back{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.container{
+  padding:50px 6%;
+  max-width:1100px;
+  margin:auto;
+}
+
+.number{
+  color:#666;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.description{
+  color:#888;
+  font-size:16px;
+  margin-bottom:35px;
+}
+
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.video-card{
+  background:#111;
+  border:1px solid #252525;
+  border-radius:18px;
+  padding:12px;
+  overflow:hidden;
+}
+
+.video-card video{
+  width:100%;
+  display:block;
+  border-radius:12px;
+  background:#000;
+}
+
+.video-card h3{
+  font-size:16px;
+  margin:14px 5px 4px;
+}
+
+.video-card p{
+  color:#777;
+  font-size:13px;
+  margin:0 5px 5px;
+}
+
+@media(max-width:600px){
+
+  nav{
+    padding:16px 5%;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+
+  .container{
+    padding:40px 5%;
+  }
+
+  h1{
+    font-size:32px;
+  }
+
+  .video-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .video-card{
+    padding:8px;
+    border-radius:14px;
+  }
+
+  .video-card video{
+    border-radius:9px;
+  }
+
+  .video-card h3{
+    font-size:13px;
+  }
+
+  .video-card p{
+    font-size:11px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+  <a href="index.html" class="logo">
+    IMAMEDITING
+  </a>
+
+  <a href="index.html#portfolio" class="back">
+    ← Back to Work
+  </a>
+
+</nav>
+
+<div class="container">
+
+  <div class="number">
+    01 / MOTION GRAPHICS
+  </div>
+
+  <h1>Motion Graphics</h1>
+
+  <p class="description">
+    Modern motion graphics, animations and visual effects.
+  </p>
+
+  <div class="video-grid">
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="Motion-graphic.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphics 01</h3>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="motion%20graphic%202.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphics 02</h3>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="motion%20graphic%203.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphics 03</h3>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="motion%20graphic%204.mp4" type="video/mp4">
+      </video>
+      <h3>Motion Graphics 04</h3>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
