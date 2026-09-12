@@ -233,6 +233,17 @@ footer{
   .hero p{
     font-size:16px;
   }
+}.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border-radius:50%;
 }
 </style>
 </head>
@@ -240,8 +251,10 @@ footer{
 <body>
 
 <nav>
-  <div class="logo">IMAMEDITING</div>
-
+  <div class="logo">
+  <img src="logo.png" alt="Logo">
+  <span>IMAMEDITING</span>
+  </div>
   <div>
     <a href="#services">Services</a>
     <a href="#portfolio">Work</a>
