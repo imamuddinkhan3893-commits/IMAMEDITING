@@ -649,37 +649,25 @@ footer{
 
   <div class="services">
 
-    <div class="service">
-      <h3>Video Editing</h3>
-      <p>
-        Clean cuts, transitions, pacing and professional
-        storytelling.
-      </p>
-    </div>
+  <div class="service" onclick="openPricing('video')">
+    <h3>🎬 Video Editing</h3>
+    <p>Professional video editing for your content.</p>
+  </div>
 
-    <div class="service">
-      <h3>Motion Graphics</h3>
-      <p>
-        Modern animations, text effects and visual
-        graphics.
-      </p>
-    </div>
+  <div class="service" onclick="openPricing('motion')">
+    <h3>✨ Motion Graphics</h3>
+    <p>Creative motion graphics and animations.</p>
+  </div>
 
-    <div class="service">
-      <h3>Advertisement</h3>
-      <p>
-        Engaging promotional videos for brands and
-        businesses.
-      </p>
-    </div>
+  <div class="service" onclick="openPricing('advertisement')">
+    <h3>📢 Advertisement</h3>
+    <p>Professional advertisements for brands.</p>
+  </div>
 
-    <div class="service">
-      <h3>Social Media</h3>
-      <p>
-        Short-form content optimized for social media
-        platforms.
-      </p>
-    </div>
+  <div class="service" onclick="openPricing('social')">
+    <h3>📱 Social Media</h3>
+    <p>Reels and social media content packages.</p>
+  </div>
 
   </div>
 
@@ -896,6 +884,422 @@ function playVideo(event, box){
 
 </script>
 
+<!-- PRICING POPUP -->
 
+<div id="pricingModal" class="pricing-modal">
+
+  <div class="pricing-box">
+
+    <button class="close-pricing" onclick="closePricing()">×</button>
+
+    <div id="pricingContent"></div>
+
+  </div>
+
+</div>
+
+<style>
+
+.pricing-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  padding:20px;
+  align-items:center;
+  justify-content:center;
+}
+
+.pricing-box{
+  width:100%;
+  max-width:500px;
+  max-height:85vh;
+  overflow-y:auto;
+  background:#111;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:25px 20px;
+  position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.close-pricing{
+  position:absolute;
+  top:10px;
+  right:15px;
+  background:none;
+  border:none;
+  color:white;
+  font-size:32px;
+  cursor:pointer;
+}
+
+.pricing-title{
+  font-size:24px;
+  margin-bottom:20px;
+  padding-right:35px;
+}
+
+.price-item{
+  padding:15px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.price-item:last-child{
+  border-bottom:none;
+}
+
+.price-name{
+  font-size:17px;
+  font-weight:600;
+}
+
+.price{
+  font-size:18px;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.price-duration{
+  font-size:13px;
+  color:#aaa;
+  margin-top:3px;
+}
+
+</style>
+
+<script>
+
+function openPricing(type){
+
+  const modal = document.getElementById("pricingModal");
+  const content = document.getElementById("pricingContent");
+
+  let html = "";
+
+  if(type === "video"){
+
+    html = `
+      <h2 class="pricing-title">🎬 VIDEO EDITING</h2>
+
+      <div class="price-item">
+        <div class="price-name">Basic Editing</div>
+        <div class="price">₹200–500</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Standard Editing</div>
+        <div class="price">₹300–600</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Premium Editing</div>
+        <div class="price">₹500–1,000</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+    `;
+
+  }
+
+  else if(type === "motion"){
+
+    html = `
+      <h2 class="pricing-title">✨ MOTION GRAPHICS</h2>
+
+      <div class="price-item">
+        <div class="price-name">Basic Motion Graphics</div>
+        <div class="price">₹400–800</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Advanced Motion Graphics</div>
+        <div class="price">₹500–1,000</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Premium Motion Graphics</div>
+        <div class="price">₹700–1,500</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+    `;
+
+  }
+
+  else if(type === "advertisement"){
+
+    html = `
+      <h2 class="pricing-title">📢 ADVERTISEMENT</h2>
+
+      <div class="price-item">
+        <div class="price-name">Basic Advertisement</div>
+        <div class="price">₹399</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Professional Advertisement</div>
+        <div class="price">₹599</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Premium Advertisement</div>
+        <div class="price">₹799</div>
+      </div>
+    `;
+
+  }
+
+  else if(type === "social"){
+
+    html = `
+      <h2 class="pricing-title">📱 SOCIAL MEDIA</h2>
+
+      <div class="price-item">
+        <div class="price-name">Reel / Short</div>
+        <div class="price">₹3,000 / week</div>
+        <div class="price-duration">1 Reel/Short daily</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Social Media Package</div>
+        <div class="price">₹9,999 / month</div>
+        <div class="price-duration">1 Reel daily</div>
+      </div>
+    `;
+
+  }
+
+  content.innerHTML = html;
+  modal.style.display = "flex";
+}
+
+function closePricing(){
+
+  document.getElementById("pricingModal").style.display = "none";
+
+}
+
+document.getElementById("pricingModal").addEventListener("click", function(event){
+
+  if(event.target === this){
+    closePricing();
+  }
+
+});
+
+  </script><!-- PRICING POPUP -->
+
+<div id="pricingModal" class="pricing-modal">
+
+  <div class="pricing-box">
+
+    <button class="close-pricing" onclick="closePricing()">×</button>
+
+    <div id="pricingContent"></div>
+
+  </div>
+
+</div>
+
+<style>
+
+.pricing-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  padding:20px;
+  align-items:center;
+  justify-content:center;
+}
+
+.pricing-box{
+  width:100%;
+  max-width:500px;
+  max-height:85vh;
+  overflow-y:auto;
+  background:#111;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:25px 20px;
+  position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.close-pricing{
+  position:absolute;
+  top:10px;
+  right:15px;
+  background:none;
+  border:none;
+  color:white;
+  font-size:32px;
+  cursor:pointer;
+}
+
+.pricing-title{
+  font-size:24px;
+  margin-bottom:20px;
+  padding-right:35px;
+}
+
+.price-item{
+  padding:15px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.price-item:last-child{
+  border-bottom:none;
+}
+
+.price-name{
+  font-size:17px;
+  font-weight:600;
+}
+
+.price{
+  font-size:18px;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.price-duration{
+  font-size:13px;
+  color:#aaa;
+  margin-top:3px;
+}
+
+</style>
+
+<script>
+
+function openPricing(type){
+
+  const modal = document.getElementById("pricingModal");
+  const content = document.getElementById("pricingContent");
+
+  let html = "";
+
+  if(type === "video"){
+
+    html = `
+      <h2 class="pricing-title">🎬 VIDEO EDITING</h2>
+
+      <div class="price-item">
+        <div class="price-name">Basic Editing</div>
+        <div class="price">₹200–500</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Standard Editing</div>
+        <div class="price">₹300–600</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Premium Editing</div>
+        <div class="price">₹500–1,000</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+    `;
+
+  }
+
+  else if(type === "motion"){
+
+    html = `
+      <h2 class="pricing-title">✨ MOTION GRAPHICS</h2>
+
+      <div class="price-item">
+        <div class="price-name">Basic Motion Graphics</div>
+        <div class="price">₹400–800</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Advanced Motion Graphics</div>
+        <div class="price">₹500–1,000</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Premium Motion Graphics</div>
+        <div class="price">₹700–1,500</div>
+        <div class="price-duration">30–60 sec</div>
+      </div>
+    `;
+
+  }
+
+  else if(type === "advertisement"){
+
+    html = `
+      <h2 class="pricing-title">📢 ADVERTISEMENT</h2>
+
+      <div class="price-item">
+        <div class="price-name">Basic Advertisement</div>
+        <div class="price">₹399</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Professional Advertisement</div>
+        <div class="price">₹599</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Premium Advertisement</div>
+        <div class="price">₹799</div>
+      </div>
+    `;
+
+  }
+
+  else if(type === "social"){
+
+    html = `
+      <h2 class="pricing-title">📱 SOCIAL MEDIA</h2>
+
+      <div class="price-item">
+        <div class="price-name">Reel / Short</div>
+        <div class="price">₹3,000 / week</div>
+        <div class="price-duration">1 Reel/Short daily</div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">Social Media Package</div>
+        <div class="price">₹9,999 / month</div>
+        <div class="price-duration">1 Reel daily</div>
+      </div>
+    `;
+
+  }
+
+  content.innerHTML = html;
+  modal.style.display = "flex";
+}
+
+function closePricing(){
+
+  document.getElementById("pricingModal").style.display = "none";
+
+}
+
+document.getElementById("pricingModal").addEventListener("click", function(event){
+
+  if(event.target === this){
+    closePricing();
+  }
+
+});
+
+</script>
 </body>
 </html>
