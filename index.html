@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#080808">
 
 <title>IMAMEDITING | Video Editor</title>
 
+
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 *{
   margin:0;
@@ -21,1287 +31,2103 @@ html{
 
 body{
   background:#080808;
-  color:white;
+  color:#ffffff;
   font-family:Arial,Helvetica,sans-serif;
   line-height:1.6;
   position:relative;
   overflow-x:hidden;
 }
 
-/* ANIMATED BACKGROUND */
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
 
 body::before{
   content:"";
   position:fixed;
+
   width:450px;
   height:450px;
+
   top:-150px;
   left:-150px;
-  background:radial-gradient(circle,rgba(100,70,255,.25),transparent 70%);
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(100,70,255,.25),
+    transparent 70%
+  );
+
   filter:blur(40px);
-  animation:glowMove 8s ease-in-out infinite alternate;
+
+  animation:
+  glowMove 8s ease-in-out infinite alternate;
+
   pointer-events:none;
+
   z-index:-1;
 }
+
 
 body::after{
   content:"";
   position:fixed;
+
   width:400px;
   height:400px;
+
   right:-150px;
   bottom:-100px;
-  background:radial-gradient(circle,rgba(0,180,255,.20),transparent 70%);
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(0,180,255,.20),
+    transparent 70%
+  );
+
   filter:blur(40px);
-  animation:glowMove2 10s ease-in-out infinite alternate;
+
+  animation:
+  glowMove2 10s ease-in-out infinite alternate;
+
   pointer-events:none;
+
   z-index:-1;
 }
 
+
 @keyframes glowMove{
-  from{transform:translate(0,0);}
-  to{transform:translate(180px,150px);}
+
+  from{
+    transform:translate(0,0);
+  }
+
+  to{
+    transform:translate(180px,150px);
+  }
+
 }
 
+
 @keyframes glowMove2{
-  from{transform:translate(0,0);}
-  to{transform:translate(-150px,-120px);}
+
+  from{
+    transform:translate(0,0);
+  }
+
+  to{
+    transform:translate(-150px,-120px);
+  }
+
 }
+
+
+/* FLOATING LIGHTS */
 
 .floating{
   position:fixed;
+
   width:90px;
   height:90px;
+
   border-radius:50%;
-  background:radial-gradient(circle,rgba(120,90,255,.35),transparent 70%);
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(120,90,255,.35),
+    transparent 70%
+  );
+
   filter:blur(8px);
+
   pointer-events:none;
+
   z-index:-1;
-  animation:floatAround 12s ease-in-out infinite alternate;
+
+  animation:
+  floatAround 12s ease-in-out infinite alternate;
 }
+
 
 .floating.one{
   top:25%;
   left:5%;
 }
 
+
 .floating.two{
   top:55%;
   right:5%;
+
   width:70px;
   height:70px;
+
   animation-duration:16s;
 }
+
 
 .floating.three{
   bottom:15%;
   left:35%;
+
   width:55px;
   height:55px;
+
   animation-duration:20s;
 }
 
+
 @keyframes floatAround{
-  0%{transform:translate(0,0) scale(1);}
-  25%{transform:translate(80px,-50px) scale(1.15);}
-  50%{transform:translate(150px,40px) scale(.9);}
-  75%{transform:translate(60px,120px) scale(1.1);}
-  100%{transform:translate(-40px,60px) scale(1);}
+
+  0%{
+    transform:translate(0,0) scale(1);
+  }
+
+  25%{
+    transform:translate(80px,-50px) scale(1.15);
+  }
+
+  50%{
+    transform:translate(150px,40px) scale(.9);
+  }
+
+  75%{
+    transform:translate(60px,120px) scale(1.1);
+  }
+
+  100%{
+    transform:translate(-40px,60px) scale(1);
+  }
+
 }
+
+
+/* =========================
+   COMMON
+========================= */
 
 a{
   color:inherit;
   text-decoration:none;
 }
 
+
 .container{
   width:min(1100px,92%);
   margin:auto;
 }
 
-/* HEADER */
-
-header{
-  padding:20px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(8,8,8,.88);
-  backdrop-filter:blur(12px);
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:20px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
-.logo img{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-  border-radius:50%;
-}
-
-.nav-links{
-  display:flex;
-  gap:18px;
-  font-size:14px;
-}
-
-.nav-links a{
-  color:#bbb;
-  transition:.25s ease;
-}
-
-.nav-links a:hover{
-  color:white;
-}
-
-/* COMMON */
 
 section{
   padding:80px 0;
 }
 
+
 .section-number{
   color:#777;
+
   font-size:13px;
+
   letter-spacing:2px;
+
   margin-bottom:10px;
 }
 
+
 .section-title{
-  font-size:clamp(30px,6vw,48px);
+  color:#ffffff;
+
+  font-size:
+  clamp(30px,6vw,48px);
+
   margin-bottom:14px;
 }
 
+
 .section-subtitle{
   color:#999;
+
   max-width:650px;
 }
 
-/* HERO */
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+
+  padding:20px 0;
+
+  border-bottom:
+  1px solid rgba(255,255,255,.08);
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  background:
+  rgba(8,8,8,.88);
+
+  backdrop-filter:blur(12px);
+}
+
+
+.nav{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+}
+
+
+.logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  font-size:20px;
+
+  font-weight:800;
+
+  letter-spacing:1px;
+}
+
+
+.logo img{
+
+  width:42px;
+  height:42px;
+
+  object-fit:contain;
+
+  border-radius:50%;
+}
+
+
+.nav-links{
+
+  display:flex;
+
+  gap:18px;
+
+  font-size:14px;
+}
+
+
+.nav-links a{
+
+  color:#aaa;
+
+  transition:.25s ease;
+}
+
+
+.nav-links a:hover{
+
+  color:#ffffff;
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
+
   min-height:78vh;
+
   display:flex;
+
   align-items:center;
 }
 
+
 .hero-content{
+
   max-width:760px;
 }
 
+
 .eyebrow{
+
   color:#aaa;
+
   letter-spacing:3px;
+
   font-size:12px;
+
   margin-bottom:16px;
 }
 
+
 .hero h1{
-  font-size:clamp(42px,9vw,88px);
+
+  font-size:
+  clamp(42px,9vw,88px);
+
   line-height:1;
+
   margin-bottom:22px;
 }
 
+
 .hero h1 span{
-  background:linear-gradient(135deg,#fff,#777);
+
+  background:
+  linear-gradient(
+    135deg,
+    #ffffff,
+    #777777
+  );
+
   -webkit-background-clip:text;
+
   background-clip:text;
+
   color:transparent;
 }
 
+
 .hero p{
+
   max-width:650px;
+
   color:#aaa;
+
   font-size:17px;
+
   margin-bottom:28px;
 }
 
+
 .buttons{
+
   display:flex;
+
   flex-wrap:wrap;
+
   gap:12px;
 }
 
+
 .btn{
+
   display:inline-block;
+
   padding:13px 20px;
-  border:1px solid #333;
+
+  border:
+  1px solid #333;
+
   border-radius:10px;
+
   background:#151515;
-  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+
+  transition:
+  transform .3s ease,
+  box-shadow .3s ease,
+  border-color .3s ease;
 }
 
+
 .btn:hover{
+
   transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(100,80,255,.35);
+
+  box-shadow:
+  0 8px 25px
+  rgba(100,80,255,.35);
+
   border-color:#555;
 }
 
+
 .btn.primary{
-  background:linear-gradient(135deg,#735cff,#3f8cff);
+
+  background:
+  linear-gradient(
+    135deg,
+    #735cff,
+    #3f8cff
+  );
+
   border:none;
 }
 
-/* SERVICES */
+
+/* =========================
+   SERVICES
+========================= */
 
 .services{
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+  repeat(2,1fr);
+
   gap:18px;
+
   margin-top:40px;
 }
 
+
 .service{
+
   padding:28px;
+
   min-height:180px;
-  border:1px solid #292929;
+
+  border:
+  1px solid #292929;
+
   border-radius:18px;
-  background:linear-gradient(135deg,#181818,#0d0d0d);
+
+  background:
+  linear-gradient(
+    135deg,
+    #181818,
+    #0d0d0d
+  );
+
   transition:.35s ease;
+
   cursor:pointer;
 }
 
+
 .service:hover{
-  transform:translateY(-7px);
+
+  transform:
+  translateY(-7px);
+
   border-color:#555;
-  box-shadow:0 15px 40px rgba(80,60,255,.18);
+
+  box-shadow:
+  0 15px 40px
+  rgba(80,60,255,.18);
 }
+
 
 .service h3{
+
   font-size:23px;
+
   margin-bottom:12px;
+
+  color:#ffffff;
 }
 
+
 .service p{
+
   color:#aaa;
 }
 
-/* PORTFOLIO */
+
+/* =========================
+   PORTFOLIO
+========================= */
 
 .portfolio{
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+  repeat(2,1fr);
+
   gap:22px;
+
   margin-top:40px;
 }
 
+
 .project{
-  background:linear-gradient(135deg,#1b1b1b,#0d0d0d);
-  border:1px solid #292929;
+
+  background:
+  linear-gradient(
+    135deg,
+    #1b1b1b,
+    #0d0d0d
+  );
+
+  border:
+  1px solid #292929;
+
   border-radius:20px;
+
   padding:20px;
+
   display:flex;
+
   flex-direction:column;
+
   gap:18px;
-  transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+
+  transition:
+  transform .35s ease,
+  border-color .35s ease,
+  box-shadow .35s ease;
 }
+
 
 .project:hover{
-  transform:translateY(-8px);
-  border-color:rgba(120,90,255,.6);
-  box-shadow:0 15px 40px rgba(80,60,255,.18);
+
+  transform:
+  translateY(-8px);
+
+  border-color:
+  rgba(120,90,255,.6);
+
+  box-shadow:
+  0 15px 40px
+  rgba(80,60,255,.18);
 }
+
 
 .project h3{
+
   font-size:22px;
+
+  color:#ffffff;
 }
 
+
 .project p{
+
   color:#999;
+
   font-size:14px;
 }
 
-/* VIDEO */
+
+/* =========================
+   VIDEO BOX
+========================= */
 
 .video-box{
+
   position:relative;
+
   width:100%;
+
   height:320px;
+
   overflow:hidden;
+
   border-radius:14px;
+
   background:#000;
+
   cursor:pointer;
 }
+
 
 .video-box img,
 .video-box video{
+
   width:100%;
+
   height:100%;
+
   display:block;
+
   object-fit:contain;
+
   background:#000;
 }
 
+
 .video-box video{
+
   display:none;
 }
 
+
 .view-link{
+
   color:#aaa;
+
   font-size:14px;
+
+  transition:.25s ease;
 }
+
 
 .view-link:hover{
-  color:white;
+
+  color:#ffffff;
 }
 
-/* ABOUT + CONTACT */
 
-.about-box,
-.contact-box{
+/* =========================
+   ABOUT
+========================= */
+
+.about-box{
+
   margin-top:35px;
+
   padding:30px;
-  border:1px solid #292929;
+
+  border:
+  1px solid #292929;
+
   border-radius:20px;
-  background:linear-gradient(135deg,#181818,#0d0d0d);
+
+  background:
+  linear-gradient(
+    135deg,
+    #181818,
+    #0d0d0d
+  );
 }
 
-.about-box p,
-.contact-box p{
+
+.about-box p{
+
   color:#aaa;
+
   font-size:16px;
 }
 
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-box{
+
+  margin-top:35px;
+
+  padding:30px;
+
+  border:
+  1px solid #292929;
+
+  border-radius:20px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #181818,
+    #0d0d0d
+  );
+}
+
+
 .contact-box p{
+
+  color:#aaa;
+
+  font-size:16px;
+
   margin-bottom:22px;
 }
 
+
 .contact-buttons{
+
   display:flex;
+
   flex-wrap:wrap;
+
   gap:12px;
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-  border-top:1px solid #222;
+
+  border-top:
+  1px solid #222;
+
   padding:25px 0;
+
   color:#777;
+
   text-align:center;
+
   font-size:13px;
+
+  background:#080808;
 }
 
-/* PRICING POPUP */
+
+/* =========================
+   PRICING POPUP
+========================= */
 
 .pricing-modal{
+
   display:none;
+
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,.75);
+
+  background:
+  rgba(0,0,0,.75);
+
   backdrop-filter:blur(8px);
+
   z-index:9999;
+
   padding:20px;
+
   align-items:center;
+
   justify-content:center;
 }
 
+
 .pricing-box{
+
   width:100%;
+
   max-width:500px;
+
   max-height:85vh;
+
   overflow-y:auto;
-  background:#111;
-  border:1px solid rgba(255,255,255,.12);
+
+  background:#111111;
+
+  border:
+  1px solid
+  rgba(255,255,255,.12);
+
   border-radius:20px;
+
   padding:25px 20px;
+
   position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
+
+  box-shadow:
+  0 20px 60px
+  rgba(0,0,0,.5);
 }
 
+
 .close-pricing{
+
   position:absolute;
+
   top:8px;
+
   right:14px;
+
   background:none;
+
   border:none;
-  color:white;
+
+  color:#ffffff;
+
   font-size:32px;
+
   cursor:pointer;
 }
 
+
 .pricing-title{
+
   font-size:24px;
+
   margin-bottom:20px;
+
   padding-right:35px;
 }
 
+
 .price-item{
+
   padding:15px 0;
-  border-bottom:1px solid rgba(255,255,255,.1);
+
+  border-bottom:
+  1px solid
+  rgba(255,255,255,.1);
 }
 
+
 .price-item:last-child{
+
   border-bottom:none;
 }
 
+
 .price-name{
+
   font-size:17px;
+
   font-weight:600;
+
+  color:#ffffff;
 }
+
 
 .price{
+
   font-size:18px;
+
   font-weight:700;
+
   margin-top:4px;
+
+  color:#ffffff;
 }
 
+
 .price-duration{
+
   font-size:13px;
+
   color:#aaa;
+
   margin-top:3px;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
   .nav-links{
+
     gap:10px;
+
     font-size:12px;
   }
 
-  .services,
-  .portfolio{
-    grid-template-columns:repeat(2,1fr);
+
+  /* 2 COLUMN SERVICES */
+
+  .services{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
     gap:12px;
   }
 
-  .service{
-    padding:20px;
-    min-height:160px;
+
+  /* 2 COLUMN PORTFOLIO */
+
+  .portfolio{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:12px;
   }
 
+
+  .service{
+
+    padding:20px;
+
+    min-height:170px;
+  }
+
+
   .service h3{
+
     font-size:18px;
   }
 
+
   .service p{
+
     font-size:13px;
   }
 
+
   .project{
+
     padding:14px;
   }
 
+
   .project h3{
+
     font-size:18px;
   }
 
+
+  .project p{
+
+    font-size:13px;
+  }
+
+
   .video-box{
+
     height:250px;
   }
 
+
   section{
+
     padding:65px 0;
   }
+
 }
+
+
+/* IMPORTANT:
+   2 COLUMNS WILL STAY ON SMALL PHONES
+*/
 
 @media(max-width:420px){
 
   .logo{
+
     font-size:16px;
   }
 
+
   .logo img{
+
     width:36px;
+
     height:36px;
   }
 
+
   .nav-links{
-    gap:8px;
+
+    gap:7px;
   }
 
+
   .nav-links a{
+
     font-size:11px;
   }
 
+
   .hero{
+
     min-height:70vh;
   }
 
-  .services,
-  .portfolio{
-    grid-template-columns:1fr;
+
+  .services{
+
+    grid-template-columns:
+    repeat(2,1fr);
   }
-}
-/* DARK THEME COLOR FIX */
 
-html,
-body{
-  background:#080808 !important;
-  color:#ffffff !important;
-}
 
-section{
-  background:transparent !important;
-  color:#ffffff !important;
-}
+  .portfolio{
 
-.section-number{
-  color:#777777 !important;
-}
+    grid-template-columns:
+    repeat(2,1fr);
+  }
 
-.section-title{
-  color:#ffffff !important;
-}
 
-.section-subtitle{
-  color:#999999 !important;
-}
+  .service{
 
-.service{
-  background:linear-gradient(135deg,#181818,#0d0d0d) !important;
-  color:#ffffff !important;
-}
+    padding:18px 14px;
 
-.service h3{
-  color:#ffffff !important;
-}
+    min-height:175px;
+  }
 
-.service p{
-  color:#aaaaaa !important;
-}
 
-.project{
-  background:linear-gradient(135deg,#1b1b1b,#0d0d0d) !important;
-  color:#ffffff !important;
-}
+  .service h3{
 
-.project h3{
-  color:#ffffff !important;
-}
+    font-size:16px;
+  }
 
-.project p{
-  color:#999999 !important;
-}
 
-.about-box,
-.contact-box{
-  background:linear-gradient(135deg,#181818,#0d0d0d) !important;
-  color:#ffffff !important;
+  .service p{
+
+    font-size:12px;
+  }
+
+
+  .project{
+
+    padding:10px;
+  }
+
+
+  .project h3{
+
+    font-size:16px;
+  }
+
+
+  .project p{
+
+    font-size:12px;
+  }
+
+
+  .video-box{
+
+    height:220px;
+  }
+
 }
 
-.about-box p,
-.contact-box p{
-  color:#aaaaaa !important;
-}
-
-footer{
-  background:#080808 !important;
-  color:#777777 !important;
-}
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- FLOATING BACKGROUND -->
+
 <div class="floating one"></div>
+
 <div class="floating two"></div>
+
 <div class="floating three"></div>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
-  <div class="container nav">
 
-    <a href="#home" class="logo">
-      <img src="logo.png" alt="Logo">
-      <span>IMAMEDITING</span>
-    </a>
+<div class="container nav">
 
-    <nav class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#portfolio">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
 
-  </div>
+<a href="#home" class="logo">
+
+<img
+src="logo.png"
+alt="Logo">
+
+<span>
+IMAMEDITING
+</span>
+
+</a>
+
+
+<nav class="nav-links">
+
+<a href="#services">
+Services
+</a>
+
+<a href="#portfolio">
+Work
+</a>
+
+<a href="#about">
+About
+</a>
+
+<a href="#contact">
+Contact
+</a>
+
+</nav>
+
+
+</div>
+
 </header>
+
 
 
 <main>
 
-<!-- HOME -->
 
-<section id="home" class="hero">
+<!-- =========================
+     HOME
+========================= -->
 
-  <div class="container">
+<section
+id="home"
+class="hero">
 
-    <div class="hero-content">
+<div class="container">
 
-      <div class="eyebrow">
-        VIDEO EDITOR • MOTION GRAPHICS • CREATIVE EDITOR
-      </div>
+<div class="hero-content">
 
-      <h1>
-        I EDIT VIDEOS <span>THAT GET NOTICED.</span>
-      </h1>
 
-      <p>
-        Professional video editing, motion graphics and advertisement content
-        designed to make your videos look better and connect with your audience.
-      </p>
+<div class="eyebrow">
 
-      <div class="buttons">
-
-        <a href="#contact" class="btn primary">
-          Work With Me
-        </a>
-
-        <a href="#portfolio" class="btn">
-          View My Work
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- SERVICES -->
-
-<section id="services">
-
-  <div class="container">
-
-    <div class="section-number">
-      01 / SERVICES
-    </div>
-
-    <h2 class="section-title">
-      What I Do
-    </h2>
-
-    <p class="section-subtitle">
-      Tap any service card to see the pricing.
-    </p>
-
-
-    <div class="services">
-
-      <div class="service" onclick="openPricing('video')">
-
-        <h3>🎬 Video Editing</h3>
-
-        <p>
-          Professional video editing for your content.
-        </p>
-
-      </div>
-
-
-      <div class="service" onclick="openPricing('motion')">
-
-        <h3>✨ Motion Graphics</h3>
-
-        <p>
-          Creative motion graphics and animations.
-        </p>
-
-      </div>
-
-
-      <div class="service" onclick="openPricing('advertisement')">
-
-        <h3>📢 Advertisement</h3>
-
-        <p>
-          Professional advertisements for brands.
-        </p>
-
-      </div>
-
-
-      <div class="service" onclick="openPricing('social')">
-
-        <h3>📱 Social Media</h3>
-
-        <p>
-          Reels and social media content packages.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PORTFOLIO -->
-
-<section id="portfolio">
-
-  <div class="container">
-
-    <div class="section-number">
-      02 / MY WORK
-    </div>
-
-    <h2 class="section-title">
-      Selected Work
-    </h2>
-
-    <p class="section-subtitle">
-      A few examples of my editing and motion graphics work.
-    </p>
-
-
-    <div class="portfolio">
-
-
-      <!-- ADVERTISEMENT -->
-
-      <div class="project">
-
-        <div>
-
-          <h3>
-            Brand Advertisement
-          </h3>
-
-          <p>
-            Professional promotional video editing.
-          </p>
-
-        </div>
-
-
-        <div class="video-box"
-             onclick="playVideo(event,this)">
-
-          <img
-            src="thumbnail%201.png"
-            alt="Advertisement Thumbnail"
-          >
-
-          <video
-            playsinline
-            preload="metadata">
-
-            <source
-              src="ugc%20advertisement.mp4"
-              type="video/mp4">
-
-          </video>
-
-        </div>
-
-      </div>
-
-
-      <!-- MOTION GRAPHICS -->
-
-      <div class="project">
-
-        <div>
-
-          <h3>
-            Motion Graphics
-          </h3>
-
-          <p>
-            Creative motion graphics and animation work.
-          </p>
-
-        </div>
-
-
-        <div class="video-box"
-             onclick="playVideo(event,this)">
-
-          <img
-            src="thumbnail%202.png"
-            alt="Motion Graphics Thumbnail"
-          >
-
-          <video
-            playsinline
-            preload="metadata">
-
-            <source
-              src="Motion-graphic.mp4"
-              type="video/mp4">
-
-          </video>
-
-        </div>
-
-
-        <a
-          href="motion-graphics.html"
-          class="view-link">
-
-          View Motion Graphics Projects →
-
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section id="about">
-
-  <div class="container">
-
-    <div class="section-number">
-      03 / ABOUT ME
-    </div>
-
-    <h2 class="section-title">
-      About Me
-    </h2>
-
-
-    <div class="about-box">
-
-      <p>
-        I'm TubeGuide, a video editor and creative content creator.
-        I create engaging edits, motion graphics and promotional videos
-        for creators, brands and social media. I focus on clean editing,
-        strong visuals, smooth pacing and content that gets noticed.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section id="contact">
-
-  <div class="container">
-
-    <div class="section-number">
-      04 / CONTACT
-    </div>
-
-    <h2 class="section-title">
-      Let's Work Together
-    </h2>
-
-
-    <div class="contact-box">
-
-      <p>
-        Have a project in mind?
-        Contact me and let's create something great.
-      </p>
-
-
-      <div class="contact-buttons">
-
-        <a href="#" class="btn primary">
-          WhatsApp
-        </a>
-
-        <a href="#" class="btn">
-          Instagram
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-  © 2026 IMAMEDITING. All Rights Reserved.
-
-</footer>
-
-
-<!-- PRICING POPUP -->
-
-<div
-  id="pricingModal"
-  class="pricing-modal">
-
-  <div class="pricing-box">
-
-    <button
-      class="close-pricing"
-      onclick="closePricing()">
-
-      ×
-
-    </button>
-
-    <div id="pricingContent"></div>
-
-  </div>
+VIDEO EDITOR • MOTION GRAPHICS • CREATIVE EDITOR
 
 </div>
 
 
+<h1>
+
+I EDIT VIDEOS
+
+<span>
+THAT GET NOTICED.
+</span>
+
+</h1>
+
+
+<p>
+
+Professional video editing, motion graphics
+and advertisement content designed to make
+your videos look better and connect with your audience.
+
+</p>
+
+
+<div class="buttons">
+
+
+<a
+href="#contact"
+class="btn primary">
+
+Work With Me
+
+</a>
+
+
+<a
+href="#portfolio"
+class="btn">
+
+View My Work
+
+</a>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section id="services">
+
+<div class="container">
+
+
+<div class="section-number">
+
+01 / SERVICES
+
+</div>
+
+
+<h2 class="section-title">
+
+What I Do
+
+</h2>
+
+
+<p class="section-subtitle">
+
+Tap any service card to see the pricing.
+
+</p>
+
+
+
+<div class="services">
+
+
+<!-- VIDEO EDITING -->
+
+<div
+class="service"
+onclick="openPricing('video')">
+
+<h3>
+
+🎬 Video Editing
+
+</h3>
+
+<p>
+
+Professional video editing
+for your content.
+
+</p>
+
+</div>
+
+
+
+<!-- MOTION GRAPHICS -->
+
+<div
+class="service"
+onclick="openPricing('motion')">
+
+<h3>
+
+✨ Motion Graphics
+
+</h3>
+
+<p>
+
+Creative motion graphics
+and animations.
+
+</p>
+
+</div>
+
+
+
+<!-- ADVERTISEMENT -->
+
+<div
+class="service"
+onclick="openPricing('advertisement')">
+
+<h3>
+
+📢 Advertisement
+
+</h3>
+
+<p>
+
+Professional advertisements
+for brands.
+
+</p>
+
+</div>
+
+
+
+<!-- SOCIAL MEDIA -->
+
+<div
+class="service"
+onclick="openPricing('social')">
+
+<h3>
+
+📱 Social Media
+
+</h3>
+
+<p>
+
+Reels and social media
+content packages.
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     PORTFOLIO
+========================= -->
+
+<section id="portfolio">
+
+<div class="container">
+
+
+<div class="section-number">
+
+02 / PORTFOLIO
+
+</div>
+
+
+<h2 class="section-title">
+
+Selected Work
+
+</h2>
+
+
+<p class="section-subtitle">
+
+A few examples of the type of content I create.
+
+</p>
+
+
+
+<div class="portfolio">
+
+
+<!-- =========================
+     ADVERTISEMENT PROJECT
+========================= -->
+
+<div class="project">
+
+
+<div>
+
+<h3>
+
+Brand Advertisement
+
+</h3>
+
+
+<p>
+
+Professional promotional
+video editing.
+
+</p>
+
+</div>
+
+
+
+<div
+class="video-box"
+onclick="playVideo(event,this)">
+
+
+<img
+src="thumbnail%201.png"
+alt="Advertisement Thumbnail">
+
+
+<video
+playsinline
+preload="metadata">
+
+<source
+src="ugc%20advertisement.mp4"
+type="video/mp4">
+
+</video>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+     MOTION GRAPHICS PROJECT
+========================= -->
+
+<div class="project">
+
+
+<div>
+
+<h3>
+
+Motion Graphics
+
+</h3>
+
+
+<p>
+
+Creative motion graphics
+and animation work.
+
+</p>
+
+</div>
+
+
+
+<div
+class="video-box"
+onclick="playVideo(event,this)">
+
+
+<img
+src="thumbnail%202.png"
+alt="Motion Graphics Thumbnail">
+
+
+<video
+playsinline
+preload="metadata">
+
+<source
+src="Motion-graphic.mp4"
+type="video/mp4">
+
+</video>
+
+
+</div>
+
+
+
+<a
+href="motion-graphics.html"
+class="view-link">
+
+View Motion Graphics Projects →
+
+</a>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+<div class="container">
+
+
+<div class="section-number">
+
+03 / ABOUT ME
+
+</div>
+
+
+<h2 class="section-title">
+
+About Me
+
+</h2>
+
+
+
+<div class="about-box">
+
+<p>
+
+I'm TubeGuide, a video editor and creative
+content creator. I have a YouTube channel
+with 1.9K+ subscribers and I create engaging
+video edits, motion graphics and promotional
+content. My focus is clean editing, strong
+visuals, smooth pacing and content that
+gets noticed.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section id="contact">
+
+<div class="container">
+
+
+<div class="section-number">
+
+04 / CONTACT
+
+</div>
+
+
+<h2 class="section-title">
+
+Let's Work Together
+
+</h2>
+
+
+
+<div class="contact-box">
+
+
+<p>
+
+Have a project in mind?
+Contact me and let's create
+something great.
+
+</p>
+
+
+<div class="contact-buttons">
+
+
+<a
+href="#"
+class="btn primary">
+
+WhatsApp
+
+</a>
+
+
+<a
+href="#"
+class="btn">
+
+Instagram
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+© 2026 IMAMEDITING.
+All Rights Reserved.
+
+</footer>
+
+
+
+<!-- =========================
+     PRICING POPUP
+========================= -->
+
+<div
+id="pricingModal"
+class="pricing-modal">
+
+
+<div class="pricing-box">
+
+
+<button
+class="close-pricing"
+onclick="closePricing()">
+
+×
+
+</button>
+
+
+<div id="pricingContent"></div>
+
+
+</div>
+
+
+</div>
+
+
+
 <script>
 
-/* VIDEO PLAY */
+
+/* =========================
+   VIDEO PLAY
+========================= */
 
 function playVideo(event,box){
 
-  event.stopPropagation();
+event.stopPropagation();
 
-  const thumbnail =
-    box.querySelector("img");
 
-  const video =
-    box.querySelector("video");
+const thumbnail =
+box.querySelector("img");
 
-  thumbnail.style.display="none";
 
-  video.style.display="block";
+const video =
+box.querySelector("video");
 
-  video.controls=true;
 
-  video.play().catch(function(){});
+thumbnail.style.display="none";
+
+
+video.style.display="block";
+
+
+video.controls=true;
+
+
+video.play().catch(function(){
+
+});
 
 }
 
 
-/* OPEN PRICING */
+
+/* =========================
+   OPEN PRICING
+========================= */
 
 function openPricing(type){
 
-  const modal =
-    document.getElementById("pricingModal");
 
-  const content =
-    document.getElementById("pricingContent");
+const modal =
+document.getElementById("pricingModal");
 
-  let html="";
 
+const content =
+document.getElementById("pricingContent");
 
-  /* VIDEO EDITING */
 
-  if(type==="video"){
+let html="";
 
-    html=`
 
-      <h2 class="pricing-title">
-        🎬 VIDEO EDITING
-      </h2>
 
+/* VIDEO EDITING */
 
-      <div class="price-item">
+if(type==="video"){
 
-        <div class="price-name">
-          Basic Editing
-        </div>
+html=`
 
-        <div class="price">
-          ₹200–500
-        </div>
+<h2 class="pricing-title">
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
+🎬 VIDEO EDITING
 
-      </div>
+</h2>
 
 
-      <div class="price-item">
+<div class="price-item">
 
-        <div class="price-name">
-          Standard Editing
-        </div>
+<div class="price-name">
 
-        <div class="price">
-          ₹300–600
-        </div>
+Basic Editing
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
+</div>
 
-      </div>
+<div class="price">
 
+₹200–500
 
-      <div class="price-item">
+</div>
 
-        <div class="price-name">
-          Premium Editing
-        </div>
+<div class="price-duration">
 
-        <div class="price">
-          ₹500–1,000
-        </div>
+30–60 sec
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
+</div>
 
-      </div>
+</div>
 
-    `;
 
-  }
 
+<div class="price-item">
 
-  /* MOTION GRAPHICS */
+<div class="price-name">
 
-  else if(type==="motion"){
+Standard Editing
 
-    html=`
+</div>
 
-      <h2 class="pricing-title">
-        ✨ MOTION GRAPHICS
-      </h2>
+<div class="price">
 
+₹300–600
 
-      <div class="price-item">
+</div>
 
-        <div class="price-name">
-          Basic Motion Graphics
-        </div>
+<div class="price-duration">
 
-        <div class="price">
-          ₹400–800
-        </div>
+30–60 sec
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
+</div>
 
-      </div>
+</div>
 
 
-      <div class="price-item">
 
-        <div class="price-name">
-          Advanced Motion Graphics
-        </div>
+<div class="price-item">
 
-        <div class="price">
-          ₹500–1,000
-        </div>
+<div class="price-name">
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
+Premium Editing
 
-      </div>
+</div>
 
+<div class="price">
 
-      <div class="price-item">
+₹500–1,000
 
-        <div class="price-name">
-          Premium Motion Graphics
-        </div>
+</div>
 
-        <div class="price">
-          ₹700–1,500
-        </div>
+<div class="price-duration">
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
+30–60 sec
 
-      </div>
+</div>
 
-    `;
+</div>
 
-  }
-
-
-  /* ADVERTISEMENT */
-
-  else if(type==="advertisement"){
-
-    html=`
-
-      <h2 class="pricing-title">
-        📢 ADVERTISEMENT
-      </h2>
-
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Basic Advertisement
-        </div>
-
-        <div class="price">
-          ₹399
-        </div>
-
-      </div>
-
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Professional Advertisement
-        </div>
-
-        <div class="price">
-          ₹599
-        </div>
-
-      </div>
-
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Premium Advertisement
-        </div>
-
-        <div class="price">
-          ₹799
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* SOCIAL MEDIA */
-
-  else if(type==="social"){
-
-    html=`
-
-      <h2 class="pricing-title">
-        📱 SOCIAL MEDIA
-      </h2>
-
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Reel / Short
-        </div>
-
-        <div class="price">
-          ₹3,000 / week
-        </div>
-
-        <div class="price-duration">
-          1 Reel/Short daily
-        </div>
-
-      </div>
-
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Social Media Package
-        </div>
-
-        <div class="price">
-          ₹9,999 / month
-        </div>
-
-        <div class="price-duration">
-          1 Reel daily
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  content.innerHTML=html;
-
-  modal.style.display="flex";
-
-  document.body.style.overflow="hidden";
+`;
 
 }
 
 
-/* CLOSE PRICING */
+
+/* MOTION GRAPHICS */
+
+else if(type==="motion"){
+
+html=`
+
+<h2 class="pricing-title">
+
+✨ MOTION GRAPHICS
+
+</h2>
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Basic Motion Graphics
+
+</div>
+
+<div class="price">
+
+₹400–800
+
+</div>
+
+<div class="price-duration">
+
+30–60 sec
+
+</div>
+
+</div>
+
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Advanced Motion Graphics
+
+</div>
+
+<div class="price">
+
+₹500–1,000
+
+</div>
+
+<div class="price-duration">
+
+30–60 sec
+
+</div>
+
+</div>
+
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Premium Motion Graphics
+
+</div>
+
+<div class="price">
+
+₹700–1,500
+
+</div>
+
+<div class="price-duration">
+
+30–60 sec
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+/* ADVERTISEMENT */
+
+else if(type==="advertisement"){
+
+html=`
+
+<h2 class="pricing-title">
+
+📢 ADVERTISEMENT
+
+</h2>
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Basic Advertisement
+
+</div>
+
+<div class="price">
+
+₹399
+
+</div>
+
+</div>
+
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Professional Advertisement
+
+</div>
+
+<div class="price">
+
+₹599
+
+</div>
+
+</div>
+
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Premium Advertisement
+
+</div>
+
+<div class="price">
+
+₹799
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+/* SOCIAL MEDIA */
+
+else if(type==="social"){
+
+html=`
+
+<h2 class="pricing-title">
+
+📱 SOCIAL MEDIA
+
+</h2>
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Reel / Short
+
+</div>
+
+<div class="price">
+
+₹3,000 / week
+
+</div>
+
+<div class="price-duration">
+
+1 Reel/Short daily
+
+</div>
+
+</div>
+
+
+
+<div class="price-item">
+
+<div class="price-name">
+
+Social Media Package
+
+</div>
+
+<div class="price">
+
+₹9,999 / month
+
+</div>
+
+<div class="price-duration">
+
+1 Reel daily
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+content.innerHTML=html;
+
+
+modal.style.display="flex";
+
+
+document.body.style.overflow="hidden";
+
+}
+
+
+
+/* =========================
+   CLOSE PRICING
+========================= */
 
 function closePricing(){
 
-  document.getElementById(
-    "pricingModal"
-  ).style.display="none";
 
-  document.body.style.overflow="";
+document.getElementById(
+"pricingModal"
+).style.display="none";
+
+
+document.body.style.overflow="";
 
 }
 
 
-/* CLOSE WHEN OUTSIDE CLICK */
+
+/* =========================
+   OUTSIDE CLICK
+========================= */
 
 document.getElementById(
-  "pricingModal"
+"pricingModal"
 ).addEventListener(
-  "click",
-  function(event){
+"click",
+function(event){
 
-    if(event.target===this){
+if(event.target===this){
 
-      closePricing();
+closePricing();
 
-    }
+}
 
-  }
+}
 );
 
 
-/* ESC KEY */
+
+/* =========================
+   ESC KEY
+========================= */
 
 document.addEventListener(
-  "keydown",
-  function(event){
+"keydown",
+function(event){
 
-    if(event.key==="Escape"){
+if(event.key==="Escape"){
 
-      closePricing();
+closePricing();
 
-    }
+}
 
-  }
+}
 );
+
 
 </script>
 
+
 </body>
-</html>
+  </html>
