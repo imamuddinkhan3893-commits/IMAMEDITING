@@ -5,8 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>IMAMEDITING | Professional Video Editor</title>
-<style>
-.project video {
+<style>.project{
+  transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+
+.project:hover{
+  transform:translateY(-8px);
+  border-color:rgba(120,90,255,.6);
+  box-shadow:0 15px 40px rgba(80,60,255,.18);
+}
+
+.btn{
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(100,80,255,.35);
+}
+
+.video-box{
+  transition:transform .35s ease;
+}
+
+.video-box:hover{
+  transform:scale(1.02);
+}
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -23,10 +47,59 @@
   font-family:Arial, sans-serif;
 }
 
-body{
+
+  body{
   background:#080808;
   color:white;
   line-height:1.6;
+  position:relative;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  width:450px;
+  height:450px;
+  top:-150px;
+  left:-150px;
+  background:radial-gradient(circle, rgba(100,70,255,.25), transparent 70%);
+  filter:blur(40px);
+  animation:glowMove 8s ease-in-out infinite alternate;
+  pointer-events:none;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  right:-150px;
+  bottom:-100px;
+  background:radial-gradient(circle, rgba(0,180,255,.20), transparent 70%);
+  filter:blur(40px);
+  animation:glowMove2 10s ease-in-out infinite alternate;
+  pointer-events:none;
+  z-index:-1;
+}
+
+@keyframes glowMove{
+  from{
+    transform:translate(0,0);
+  }
+  to{
+    transform:translate(180px,150px);
+  }
+}
+
+@keyframes glowMove2{
+  from{
+    transform:translate(0,0);
+  }
+  to{
+    transform:translate(-150px,-120px);
+  }
 }
 
 nav{
