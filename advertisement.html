@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#080808">
+
+<title>Advertisement | IMAMEDITING</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#080808;
+  color:#ffffff;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  width:450px;
+  height:450px;
+  top:-150px;
+  left:-150px;
+  background:radial-gradient(
+    circle,
+    rgba(100,70,255,.25),
+    transparent 70%
+  );
+  filter:blur(40px);
+  animation:glowMove 8s ease-in-out infinite alternate;
+  pointer-events:none;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  right:-150px;
+  bottom:-100px;
+  background:radial-gradient(
+    circle,
+    rgba(0,180,255,.20),
+    transparent 70%
+  );
+  filter:blur(40px);
+  animation:glowMove2 10s ease-in-out infinite alternate;
+  pointer-events:none;
+  z-index:-1;
+}
+
+@keyframes glowMove{
+  from{
+    transform:translate(0,0);
+  }
+
+  to{
+    transform:translate(180px,150px);
+  }
+}
+
+@keyframes glowMove2{
+  from{
+    transform:translate(0,0);
+  }
+
+  to{
+    transform:translate(-150px,-120px);
+  }
+}
+
+/* FLOATING LIGHTS */
+
+.floating{
+  position:fixed;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(120,90,255,.35),
+    transparent 70%
+  );
+  filter:blur(8px);
+  pointer-events:none;
+  z-index:-1;
+  animation:floatAround 12s ease-in-out infinite alternate;
+}
+
+.floating.one{
+  top:25%;
+  left:5%;
+}
+
+.floating.two{
+  top:55%;
+  right:5%;
+  width:70px;
+  height:70px;
+  animation-duration:16s;
+}
+
+.floating.three{
+  bottom:15%;
+  left:35%;
+  width:55px;
+  height:55px;
+  animation-duration:20s;
+}
+
+@keyframes floatAround{
+
+  0%{
+    transform:translate(0,0) scale(1);
+  }
+
+  25%{
+    transform:translate(80px,-50px) scale(1.15);
+  }
+
+  50%{
+    transform:translate(150px,40px) scale(.9);
+  }
+
+  75%{
+    transform:translate(60px,120px) scale(1.1);
+  }
+
+  100%{
+    transform:translate(-40px,60px) scale(1);
+  }
+
+}
+
+/* =========================
+   COMMON
+========================= */
+
+.container{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(8,8,8,.88);
+  backdrop-filter:blur(12px);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border-radius:50%;
+}
+
+.nav-links{
+  display:flex;
+  gap:18px;
+  font-size:14px;
+}
+
+.nav-links a{
+  color:#aaa;
+  transition:.25s ease;
+}
+
+.nav-links a:hover{
+  color:#fff;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+  padding:80px 0;
+}
+
+.section-number{
+  color:#777;
+  font-size:13px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+
+.section-title{
+  color:#fff;
+  font-size:clamp(30px,6vw,48px);
+  margin-bottom:14px;
+}
+
+.section-subtitle{
+  color:#999;
+  max-width:650px;
+}
+
+/* =========================
+   VIDEO GRID
+========================= */
+
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+  margin-top:40px;
+}
+
+.video-card{
+  background:linear-gradient(
+    135deg,
+    #1b1b1b,
+    #0d0d0d
+  );
+
+  border:1px solid #292929;
+
+  border-radius:20px;
+
+  padding:18px;
+
+  transition:
+  transform .35s ease,
+  border-color .35s ease,
+  box-shadow .35s ease;
+}
+
+.video-card:hover{
+  transform:translateY(-8px);
+
+  border-color:
+  rgba(120,90,255,.6);
+
+  box-shadow:
+  0 15px 40px
+  rgba(80,60,255,.18);
+}
+
+.video-card h3{
+  font-size:20px;
+  margin-bottom:14px;
+}
+
+.video-box{
+  width:100%;
+  height:320px;
+  overflow:hidden;
+  border-radius:14px;
+  background:#000;
+}
+
+.video-box video{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  background:#000;
+}
+
+.back-link{
+  display:inline-block;
+  margin-top:35px;
+  color:#aaa;
+  font-size:14px;
+  transition:.25s ease;
+}
+
+.back-link:hover{
+  color:#fff;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+  .nav-links{
+    gap:10px;
+    font-size:12px;
+  }
+
+  .video-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .video-card{
+    padding:10px;
+  }
+
+  .video-card h3{
+    font-size:16px;
+  }
+
+  .video-box{
+    height:250px;
+  }
+
+  .page{
+    padding:65px 0;
+  }
+}
+
+@media(max-width:420px){
+
+  .logo{
+    font-size:16px;
+  }
+
+  .logo img{
+    width:36px;
+    height:36px;
+  }
+
+  .nav-links{
+    gap:7px;
+  }
+
+  .nav-links a{
+    font-size:11px;
+  }
+
+  .video-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .video-box{
+    height:220px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- FLOATING BACKGROUND -->
+
+<div class="floating one"></div>
+<div class="floating two"></div>
+<div class="floating three"></div>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="container nav">
+
+<a href="index.html" class="logo">
+
+<img
+src="logo.png"
+alt="Logo">
+
+<span>IMAMEDITING</span>
+
+</a>
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+
+<a href="index.html#services">Services</a>
+
+<a href="index.html#portfolio">Work</a>
+
+<a href="index.html#contact">Contact</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- CONTENT -->
+
+<main>
+
+<section class="page">
+
+<div class="container">
+
+<div class="section-number">
+ADVERTISEMENT
+</div>
+
+<h1 class="section-title">
+Advertisement Projects
+</h1>
+
+<p class="section-subtitle">
+Professional advertisement videos created for brands and promotional content.
+</p>
+
+
+<div class="video-grid">
+
+
+<!-- ADVERTISEMENT 2 -->
+
+<div class="video-card">
+
+<h3>
+Advertisement 01
+</h3>
+
+<div class="video-box">
+
+<video
+controls
+playsinline
+preload="metadata">
+
+<source
+src="advertisement%202.mp4"
+type="video/mp4">
+
+Your browser does not support video.
+
+</video>
+
+</div>
+
+</div>
+
+
+<!-- ADVERTISEMENT 3 -->
+
+<div class="video-card">
+
+<h3>
+Advertisement 02
+</h3>
+
+<div class="video-box">
+
+<video
+controls
+playsinline
+preload="metadata">
+
+<source
+src="advertisement%203.mp4"
+type="video/mp4">
+
+Your browser does not support video.
+
+</video>
+
+</div>
+
+</div>
+
+
+<!-- ADVERTISEMENT 4 -->
+
+<div class="video-card">
+
+<h3>
+Advertisement 03
+</h3>
+
+<div class="video-box">
+
+<video
+controls
+playsinline
+preload="metadata">
+
+<source
+src="advertisement%204.mp4"
+type="video/mp4">
+
+Your browser does not support video.
+
+</video>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<a
+href="index.html#portfolio"
+class="back-link">
+
+← Back to Portfolio
+
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+© 2026 IMAMEDITING. All Rights Reserved.
+
+</footer>
+
+</body>
+</html>
