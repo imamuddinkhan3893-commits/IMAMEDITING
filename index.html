@@ -1,1459 +1,1177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-
-<title>IMAMEDITING | Video Editor</title>
-
-<style>
-
-/* =========================
-   RESET
-========================= */
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:#080808;
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-  line-height:1.6;
-  overflow-x:hidden;
-  position:relative;
-}
-
-
-/* =========================
-   BACKGROUND GLOW
-========================= */
-
-body::before{
-  content:"";
-  position:fixed;
-  width:450px;
-  height:450px;
-  top:-150px;
-  left:-150px;
-  background:radial-gradient(
-    circle,
-    rgba(100,70,255,.25),
-    transparent 70%
-  );
-  filter:blur(40px);
-  animation:glowMove 8s ease-in-out infinite alternate;
-  pointer-events:none;
-  z-index:-1;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  width:400px;
-  height:400px;
-  right:-150px;
-  bottom:-100px;
-  background:radial-gradient(
-    circle,
-    rgba(0,180,255,.20),
-    transparent 70%
-  );
-  filter:blur(40px);
-  animation:glowMove2 10s ease-in-out infinite alternate;
-  pointer-events:none;
-  z-index:-1;
-}
-
-@keyframes glowMove{
-  from{
-    transform:translate(0,0);
-  }
-
-  to{
-    transform:translate(180px,150px);
-  }
-}
-
-@keyframes glowMove2{
-  from{
-    transform:translate(0,0);
-  }
-
-  to{
-    transform:translate(-150px,-120px);
-  }
-}
-
-
-/* =========================
-   FLOATING LIGHTS
-========================= */
-
-.floating{
-  position:fixed;
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:radial-gradient(
-    circle,
-    rgba(120,90,255,.35),
-    transparent 70%
-  );
-  filter:blur(8px);
-  pointer-events:none;
-  z-index:-1;
-  animation:floatAround 12s ease-in-out infinite alternate;
-}
-
-.floating.one{
-  top:25%;
-  left:5%;
-}
-
-.floating.two{
-  top:55%;
-  right:5%;
-  width:70px;
-  height:70px;
-  animation-duration:16s;
-}
-
-.floating.three{
-  bottom:15%;
-  left:35%;
-  width:55px;
-  height:55px;
-  animation-duration:20s;
-}
-
-@keyframes floatAround{
-
-  0%{
-    transform:translate(0,0) scale(1);
-  }
-
-  25%{
-    transform:translate(80px,-50px) scale(1.15);
-  }
-
-  50%{
-    transform:translate(150px,40px) scale(.9);
-  }
-
-  75%{
-    transform:translate(60px,120px) scale(1.1);
-  }
-
-  100%{
-    transform:translate(-40px,60px) scale(1);
-  }
-
-}
-
-
-/* =========================
-   COMMON
-========================= */
-
-.container{
-  width:min(1100px,92%);
-  margin:auto;
-}
-
-section{
-  padding:70px 0;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.section-number{
-  color:#777;
-  font-size:13px;
-  letter-spacing:2px;
-  margin-bottom:10px;
-}
-
-.section-title{
-  color:#fff;
-  font-size:clamp(30px,6vw,48px);
-  line-height:1.1;
-  margin-bottom:14px;
-}
-
-.section-subtitle{
-  color:#999;
-  max-width:650px;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-  padding:20px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(8,8,8,.88);
-  backdrop-filter:blur(12px);
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:20px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
-.logo img{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-  border-radius:50%;
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  font-size:14px;
-}
-
-.nav-links a{
-  color:#aaa;
-  transition:.25s ease;
-}
-
-.nav-links a:hover{
-  color:#fff;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  min-height:78vh;
-  display:flex;
-  align-items:center;
-}
-
-.hero-content{
-  max-width:760px;
-}
-
-.eyebrow{
-  color:#aaa;
-  letter-spacing:3px;
-  font-size:12px;
-  margin-bottom:16px;
-}
-
-.hero h1{
-  font-size:clamp(42px,9vw,88px);
-  line-height:1;
-  margin-bottom:22px;
-}
-
-.hero h1 span{
-  display:block;
-  background:linear-gradient(
-    135deg,
-    #fff,
-    #777
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:650px;
-  color:#aaa;
-  font-size:17px;
-  margin-bottom:28px;
-}
-
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-
-.btn{
-  display:inline-block;
-  padding:13px 20px;
-  border:1px solid #333;
-  border-radius:10px;
-  background:#151515;
-  transition:.3s ease;
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(100,80,255,.35);
-}
-
-.btn.primary{
-  background:linear-gradient(
-    135deg,
-    #735cff,
-    #3f8cff
-  );
-  border:none;
-}
-
-
-/* =========================
-   SERVICES
-========================= */
-
-.services{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-  margin-top:38px;
-}
-
-.service{
-  min-height:180px;
-  padding:25px;
-  border:1px solid #292929;
-  border-radius:18px;
-  background:linear-gradient(
-    135deg,
-    #181818,
-    #0d0d0d
-  );
-  cursor:pointer;
-  transition:.35s ease;
-}
-
-.service:hover{
-  transform:translateY(-6px);
-  border-color:#555;
-  box-shadow:0 15px 40px rgba(80,60,255,.18);
-}
-
-.service h3{
-  font-size:21px;
-  margin-bottom:12px;
-}
-
-.service p{
-  color:#aaa;
-}
-
-
-/* =========================
-   PORTFOLIO
-========================= */
-
-#portfolio{
-  padding-top:65px;
-  padding-bottom:65px;
-}
-
-.portfolio{
-  width:100%;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
-  margin-top:40px;
-  align-items:stretch;
-}
-
-.project{
-  width:100%;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  height:100%;
-  padding:16px;
-  border:1px solid #292929;
-  border-radius:20px;
-  background:linear-gradient(
-    135deg,
-    #1b1b1b,
-    #0d0d0d
-  );
-  overflow:hidden;
-  transition:.35s ease;
-}
-
-.project:hover{
-  transform:translateY(-5px);
-  border-color:rgba(120,90,255,.6);
-  box-shadow:0 15px 40px rgba(80,60,255,.18);
-}
-
-.project h3{
-  font-size:21px;
-  line-height:1.25;
-  margin-bottom:8px;
-}
-
-.project p{
-  color:#999;
-  font-size:14px;
-  line-height:1.5;
-  margin-bottom:14px;
-}
-
-
-/* =========================
-   THUMBNAIL
-========================= */
-
-.project-thumbnail{
-  display:block;
-  width:100%;
-  cursor:pointer;
-  overflow:hidden;
-  border-radius:14px;
-  flex:1;
-}
-
-.project-thumbnail img{
-  display:block;
-  width:100%;
-  aspect-ratio:9 / 16;
-  object-fit:cover;
-  border-radius:14px;
-  transition:transform .35s ease;
-}
-
-.project-thumbnail:hover img{
-  transform:scale(1.025);
-}
-
-
-/* =========================
-   CLICK HERE BUTTON
-========================= */
-
-.click-here{
-  display:block;
-  width:100%;
-  margin-top:14px;
-  padding:13px 10px;
-  border:1px solid #333;
-  border-radius:11px;
-  background:#151515;
-  text-align:center;
-  color:#fff;
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:.3px;
-  transition:.3s ease;
-}
-
-.click-here:hover{
-  background:#202020;
-  border-color:#666;
-  transform:translateY(-2px);
-}
-
-
-/* =========================
-   ABOUT
-========================= */
-
-#about{
-  padding-top:55px;
-  padding-bottom:65px;
-}
-
-.about-box{
-  margin-top:35px;
-  padding:30px;
-  border:1px solid #292929;
-  border-radius:20px;
-  background:linear-gradient(
-    135deg,
-    #181818,
-    #0d0d0d
-  );
-}
-
-.about-box p{
-  color:#aaa;
-  font-size:16px;
-  line-height:1.8;
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-#contact{
-  padding-top:65px;
-}
-
-.contact-box{
-  margin-top:35px;
-  padding:30px;
-  border:1px solid #292929;
-  border-radius:20px;
-  background:linear-gradient(
-    135deg,
-    #181818,
-    #0d0d0d
-  );
-}
-
-.contact-box p{
-  color:#aaa;
-  font-size:16px;
-  margin-bottom:22px;
-}
-
-.contact-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  border-top:1px solid #222;
-  padding:25px 0;
-  color:#777;
-  text-align:center;
-  font-size:13px;
-  background:#080808;
-}
-
-
-/* =========================
-   PRICING MODAL
-========================= */
-
-.pricing-modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  padding:20px;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(8px);
-}
-
-.pricing-box{
-  width:100%;
-  max-width:500px;
-  max-height:85vh;
-  overflow-y:auto;
-  position:relative;
-  padding:25px 20px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  background:#111;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-
-.close-pricing{
-  position:absolute;
-  top:8px;
-  right:14px;
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:32px;
-  cursor:pointer;
-  line-height:1;
-}
-
-.pricing-title{
-  font-size:24px;
-  margin-bottom:20px;
-  padding-right:35px;
-}
-
-.price-item{
-  padding:15px 0;
-  border-bottom:1px solid rgba(255,255,255,.1);
-}
-
-.price-item:last-child{
-  border-bottom:none;
-}
-
-.price-name{
-  font-size:17px;
-  font-weight:600;
-}
-
-.price{
-  font-size:18px;
-  font-weight:700;
-  margin-top:4px;
-}
-
-.price-duration{
-  font-size:13px;
-  color:#aaa;
-  margin-top:3px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-  section{
-    padding:60px 0;
-  }
-
-  .nav{
-    gap:12px;
-  }
-
-  .logo{
-    font-size:16px;
-    gap:8px;
-  }
-
-  .logo img{
-    width:38px;
-    height:38px;
-  }
-
-  .nav-links{
-    gap:9px;
-    font-size:11px;
-  }
-
-  .hero{
-    min-height:72vh;
-  }
-
-  .hero h1{
-    font-size:clamp(40px,11vw,66px);
-  }
-
-  .hero p{
-    font-size:15px;
-  }
-
-  .services{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-  }
-
-  .service{
-    min-height:160px;
-    padding:18px 14px;
-  }
-
-  .service h3{
-    font-size:16px;
-    line-height:1.3;
-  }
-
-  .service p{
-    font-size:12px;
-    line-height:1.5;
-  }
-
-  .portfolio{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:14px;
-    margin-top:32px;
-  }
-
-  .project{
-    padding:12px;
-    border-radius:18px;
-  }
-
-  .project h3{
-    font-size:17px;
-  }
-
-  .project p{
-    font-size:12px;
-  }
-
-  .click-here{
-    font-size:11px;
-    padding:12px 5px;
-  }
-
-  #about{
-    padding-top:55px;
-  }
-
-  .about-box{
-    padding:24px 20px;
-  }
-
-  .about-box p{
-    font-size:15px;
-  }
-
-}
-
-
-@media(max-width:380px){
-
-  .logo{
-    font-size:14px;
-  }
-
-  .logo img{
-    width:34px;
-    height:34px;
-  }
-
-  .nav-links{
-    gap:6px;
-    font-size:10px;
-  }
-
-  .project{
-    padding:10px;
-  }
-
-  .project h3{
-    font-size:15px;
-  }
-
-  .project p{
-    font-size:11px;
-  }
-
-  .click-here{
-    font-size:10px;
-  }
-
-}
-
-
-/* =========================
-   VERY SMALL SCREEN
-========================= */
-
-@media(max-width:330px){
-
-  .nav-links{
-    display:none;
-  }
-
-  .portfolio{
-    gap:10px;
-  }
-
-  .project{
-    padding:9px;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IMAMEDITING | Video Editor</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#080808;
+      color:#fff;
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* =========================
+       BACKGROUND GLOW
+    ========================= */
+
+    body::before{
+      content:"";
+      position:fixed;
+      width:450px;
+      height:450px;
+      top:-150px;
+      left:-150px;
+      background:radial-gradient(
+        circle,
+        rgba(100,70,255,.25),
+        transparent 70%
+      );
+      filter:blur(40px);
+      animation:glowMove 8s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      width:400px;
+      height:400px;
+      right:-150px;
+      bottom:-100px;
+      background:radial-gradient(
+        circle,
+        rgba(0,180,255,.20),
+        transparent 70%
+      );
+      filter:blur(40px);
+      animation:glowMove2 10s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    @keyframes glowMove{
+      from{
+        transform:translate(0,0);
+      }
+
+      to{
+        transform:translate(180px,150px);
+      }
+    }
+
+    @keyframes glowMove2{
+      from{
+        transform:translate(0,0);
+      }
+
+      to{
+        transform:translate(-150px,-120px);
+      }
+    }
+
+    /* =========================
+       FLOATING GLOW
+    ========================= */
+
+    .floating{
+      position:fixed;
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      background:radial-gradient(
+        circle,
+        rgba(120,90,255,.35),
+        transparent 70%
+      );
+      filter:blur(8px);
+      pointer-events:none;
+      z-index:-1;
+      animation:floatAround 12s ease-in-out infinite alternate;
+    }
+
+    .floating.one{
+      top:25%;
+      left:5%;
+    }
+
+    .floating.two{
+      top:55%;
+      right:5%;
+      width:70px;
+      height:70px;
+      animation-duration:16s;
+    }
+
+    .floating.three{
+      bottom:15%;
+      left:35%;
+      width:55px;
+      height:55px;
+      animation-duration:20s;
+    }
+
+    @keyframes floatAround{
+
+      0%{
+        transform:translate(0,0) scale(1);
+      }
+
+      25%{
+        transform:translate(80px,-50px) scale(1.15);
+      }
+
+      50%{
+        transform:translate(150px,40px) scale(.9);
+      }
+
+      75%{
+        transform:translate(60px,120px) scale(1.1);
+      }
+
+      100%{
+        transform:translate(-40px,60px) scale(1);
+      }
+
+    }
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    .container{
+      width:100%;
+      max-width:1100px;
+      margin:auto;
+      padding:0 20px;
+    }
+
+    section{
+      padding:90px 0;
+    }
+
+    .section-label{
+      font-size:13px;
+      color:#9d8cff;
+      font-weight:bold;
+      letter-spacing:2px;
+      margin-bottom:10px;
+    }
+
+    h2{
+      font-size:34px;
+      margin-bottom:15px;
+    }
+
+    .section-description{
+      color:#aaa;
+      max-width:600px;
+      margin-bottom:40px;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header{
+      padding:20px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      position:relative;
+      z-index:10;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:20px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    .logo img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      border-radius:50%;
+    }
+
+    nav{
+      display:flex;
+      gap:22px;
+    }
+
+    nav a{
+      color:#bbb;
+      text-decoration:none;
+      font-size:14px;
+      transition:.3s;
+    }
+
+    nav a:hover{
+      color:#fff;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      min-height:80vh;
+      display:flex;
+      align-items:center;
+      padding:90px 0;
+    }
+
+    .hero-content{
+      max-width:850px;
+    }
+
+    .hero-tag{
+      color:#9d8cff;
+      font-size:14px;
+      font-weight:bold;
+      letter-spacing:2px;
+      margin-bottom:20px;
+    }
+
+    .hero h1{
+      font-size:clamp(45px,8vw,82px);
+      line-height:1.02;
+      letter-spacing:-3px;
+      margin-bottom:25px;
+    }
+
+    .hero p{
+      color:#aaa;
+      max-width:680px;
+      font-size:17px;
+      margin-bottom:35px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 22px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:bold;
+      font-size:14px;
+      transition:.3s;
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:#000;
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-secondary{
+      border:1px solid rgba(255,255,255,.2);
+      color:#fff;
+      background:rgba(255,255,255,.03);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.08);
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-top:40px;
+    }
+
+    .service{
+      min-height:170px;
+      padding:28px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      background:rgba(255,255,255,.035);
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .service:hover{
+      transform:translateY(-4px);
+      border-color:rgba(157,140,255,.5);
+      background:rgba(255,255,255,.055);
+    }
+
+    .service h3{
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    .service p{
+      color:#999;
+      font-size:14px;
+    }
+
+    /* =========================
+       PORTFOLIO
+    ========================= */
+
+    .portfolio{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:40px;
+      align-items:stretch;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:column;
+      padding:16px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      background:rgba(255,255,255,.035);
+      min-width:0;
+      overflow:hidden;
+    }
+
+    .project h3{
+      font-size:20px;
+      margin:4px 4px 5px;
+    }
+
+    .project p{
+      color:#999;
+      font-size:13px;
+      margin:0 4px 16px;
+    }
+
+    .project-thumbnail{
+      display:block;
+      width:100%;
+      aspect-ratio:9 / 16;
+      overflow:hidden;
+      border-radius:13px;
+      background:#111;
+    }
+
+    .project-thumbnail img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:.35s;
+    }
+
+    .project-thumbnail:hover img{
+      transform:scale(1.03);
+    }
+
+    .click-here{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      margin-top:12px;
+      border-radius:10px;
+      background:#fff;
+      color:#000;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:bold;
+      transition:.3s;
+    }
+
+    .click-here:hover{
+      transform:translateY(-2px);
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-box{
+      max-width:760px;
+    }
+
+    .about-box p{
+      color:#aaa;
+      font-size:16px;
+      margin-bottom:15px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact-box{
+      padding:35px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      background:rgba(255,255,255,.035);
+      text-align:center;
+    }
+
+    .contact-box p{
+      color:#999;
+      margin-bottom:25px;
+    }
+
+    .contact-buttons{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:25px 0;
+      text-align:center;
+      color:#666;
+      font-size:13px;
+    }
+
+    /* =========================
+       PRICING MODAL
+    ========================= */
+
+    #pricingModal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(0,0,0,.78);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:9999;
+    }
+
+    .pricing-box{
+      width:100%;
+      max-width:520px;
+      max-height:90vh;
+      overflow-y:auto;
+      position:relative;
+      padding:28px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:22px;
+      background:#101010;
+      box-shadow:0 20px 80px rgba(0,0,0,.6);
+      animation:pricingOpen .25s ease;
+    }
+
+    @keyframes pricingOpen{
+      from{
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    .close-pricing{
+      position:absolute;
+      top:12px;
+      right:15px;
+      width:36px;
+      height:36px;
+      border:0;
+      border-radius:50%;
+      background:#1d1d1d;
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+    }
+
+    .pricing-title{
+      text-align:center;
+      font-size:25px;
+      margin:5px 35px 25px;
+    }
+
+    .price-item{
+      padding:18px;
+      margin-bottom:12px;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:14px;
+      background:#151515;
+    }
+
+    .price-name{
+      font-size:16px;
+      font-weight:bold;
+      margin-bottom:4px;
+    }
+
+    .price{
+      font-size:20px;
+      font-weight:bold;
+      color:#a99cff;
+      margin-bottom:2px;
+    }
+
+    .price-duration{
+      color:#888;
+      font-size:13px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media(max-width:700px){
+
+      .container{
+        padding-left:14px;
+        padding-right:14px;
+      }
+
+      header{
+        padding:15px 0;
+      }
+
+      .nav{
+        align-items:center;
+      }
+
+      .logo{
+        font-size:17px;
+      }
+
+      .logo img{
+        width:36px;
+        height:36px;
+      }
+
+      nav{
+        gap:12px;
+      }
+
+      nav a{
+        font-size:12px;
+      }
+
+      .hero{
+        min-height:auto;
+        padding:75px 0 70px;
+      }
+
+      .hero h1{
+        font-size:46px;
+        letter-spacing:-2px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      section{
+        padding:70px 0;
+      }
+
+      h2{
+        font-size:30px;
+      }
+
+      .services{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+      }
+
+      .service{
+        min-height:150px;
+        padding:20px 15px;
+        border-radius:15px;
+      }
+
+      .service h3{
+        font-size:16px;
+      }
+
+      .service p{
+        font-size:12px;
+      }
+
+      /*
+        Keep portfolio in 3 columns on mobile
+        so all three categories stay together.
+      */
+
+      .portfolio{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:8px;
+      }
+
+      .project{
+        padding:7px;
+        border-radius:12px;
+      }
+
+      .project h3{
+        font-size:12px;
+        line-height:1.3;
+        margin:3px 2px;
+      }
+
+      .project p{
+        font-size:9px;
+        line-height:1.35;
+        margin:0 2px 8px;
+      }
+
+      .project-thumbnail{
+        border-radius:8px;
+      }
+
+      .click-here{
+        min-height:35px;
+        margin-top:7px;
+        border-radius:7px;
+        font-size:9px;
+      }
+
+      .contact-box{
+        padding:25px 15px;
+      }
+
+      .pricing-box{
+        padding:24px 16px;
+        border-radius:18px;
+      }
+
+      .pricing-title{
+        font-size:21px;
+      }
+
+    }
+
+    @media(max-width:380px){
+
+      nav{
+        gap:8px;
+      }
+
+      nav a{
+        font-size:10px;
+      }
+
+      .logo{
+        font-size:15px;
+      }
+
+      .logo img{
+        width:32px;
+        height:32px;
+      }
+
+      .hero h1{
+        font-size:40px;
+      }
+
+    }
+
+  </style>
 
 </head>
 
 
 <body>
 
-
-<!-- FLOATING LIGHTS -->
-
-<div class="floating one"></div>
-<div class="floating two"></div>
-<div class="floating three"></div>
+  <div class="floating one"></div>
+  <div class="floating two"></div>
+  <div class="floating three"></div>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<header>
+  <header>
 
-  <div class="container nav">
+    <div class="container">
 
-    <a href="#home" class="logo">
+      <div class="nav">
 
-      <img
-        src="logo.png"
-        alt="IMAMEDITING Logo"
-      >
+        <a href="index.html"
+           style="text-decoration:none;color:#fff;">
 
-      <span>
-        IMAMEDITING
-      </span>
+          <div class="logo">
 
-    </a>
+            <img
+              src="logo.png"
+              alt="IMAMEDITING Logo"
+            >
 
+            <span>IMAMEDITING</span>
 
-    <nav class="nav-links">
-
-      <a href="#services">
-        Services
-      </a>
-
-      <a href="#portfolio">
-        Work
-      </a>
-
-      <a href="#about">
-        About
-      </a>
-
-      <a href="#contact">
-        Contact
-      </a>
-
-    </nav>
-
-  </div>
-
-</header>
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section
-  id="home"
-  class="hero">
-
-  <div class="container">
-
-    <div class="hero-content">
-
-      <div class="eyebrow">
-        VIDEO EDITOR • MOTION GRAPHICS • CREATIVE EDITOR
-      </div>
-
-      <h1>
-        I EDIT VIDEOS
-        <span>THAT GET NOTICED.</span>
-      </h1>
-
-      <p>
-        Professional video editing, motion graphics
-        and advertisement content designed to make
-        your videos look better and connect with
-        your audience.
-      </p>
-
-
-      <div class="buttons">
-
-        <a
-          href="#contact"
-          class="btn primary">
-
-          Work With Me
+          </div>
 
         </a>
 
 
-        <a
-          href="#portfolio"
-          class="btn">
+        <nav>
 
-          View My Work
+          <a href="#services">
+            Services
+          </a>
 
-        </a>
+          <a href="#work">
+            Work
+          </a>
+
+          <a href="#about">
+            About
+          </a>
+
+          <a href="#contact">
+            Contact
+          </a>
+
+        </nav>
 
       </div>
 
     </div>
 
-  </div>
-
-</section>
+  </header>
 
 
+  <!-- =========================
+       HERO
+  ========================== -->
 
-<!-- =========================
-     SERVICES
-========================= -->
+  <main>
 
-<section id="services">
+    <section class="hero">
 
-  <div class="container">
+      <div class="container">
 
-    <div class="section-number">
-      01 / SERVICES
-    </div>
+        <div class="hero-content">
 
-    <h2 class="section-title">
-      What I Do
-    </h2>
+          <div class="hero-tag">
+            VIDEO EDITOR • MOTION GRAPHICS • CREATIVE EDITOR
+          </div>
 
-    <p class="section-subtitle">
-      Tap any service card to see the pricing.
-    </p>
+          <h1>
+            I EDIT VIDEOS<br>
+            THAT GET NOTICED.
+          </h1>
 
-
-    <div class="services">
-
-
-      <!-- VIDEO EDITING -->
-
-      <div
-        class="service"
-        onclick="openPricing('video')">
-
-        <h3>
-          🎬 Video Editing
-        </h3>
-
-        <p>
-          Professional video editing
-          for your content.
-        </p>
-
-      </div>
+          <p>
+            Professional video editing, motion graphics and
+            advertisement content designed to make your videos
+            look better and connect with your audience.
+          </p>
 
 
-      <!-- MOTION GRAPHICS -->
+          <div class="hero-buttons">
 
-      <div
-        class="service"
-        onclick="openPricing('motion')">
+            <a
+              href="#contact"
+              class="btn btn-primary">
 
-        <h3>
-          ✨ Motion Graphics
-        </h3>
+              Work With Me
 
-        <p>
-          Creative motion graphics
-          and animations.
-        </p>
+            </a>
+
+
+            <a
+              href="#work"
+              class="btn btn-secondary">
+
+              View My Work
+
+            </a>
+
+          </div>
+
+        </div>
 
       </div>
 
-
-      <!-- ADVERTISEMENT -->
-
-      <div
-        class="service"
-        onclick="openPricing('advertisement')">
-
-        <h3>
-          📢 Advertisement
-        </h3>
-
-        <p>
-          Professional advertisements
-          for brands.
-        </p>
-
-      </div>
+    </section>
 
 
-      <!-- SOCIAL MEDIA -->
+    <!-- =========================
+         SERVICES
+    ========================== -->
 
-      <div
-        class="service"
-        onclick="openPricing('social')">
+    <section id="services">
 
-        <h3>
-          📱 Social Media
-        </h3>
+      <div class="container">
 
-        <p>
-          Reels and social media
-          content packages.
-        </p>
+        <div class="section-label">
+          01 / SERVICES
+        </div>
 
-      </div>
+        <h2>
+          What I Do
+        </h2>
 
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     PORTFOLIO
-========================= -->
-
-<section id="portfolio">
-
-  <div class="container">
-
-    <div class="section-number">
-      02 / PORTFOLIO
-    </div>
-
-    <h2 class="section-title">
-      Selected Work
-    </h2>
-
-    <p class="section-subtitle">
-      A few examples of the type of content I create.
-    </p>
-
-
-    <div class="portfolio">
-
-
-      <!-- =====================
-           ADVERTISEMENT CARD
-      ====================== -->
-
-      <div class="project">
-
-        <h3>
-          Brand Advertisement
-        </h3>
-
-        <p>
-          Professional promotional video editing.
+        <p class="section-description">
+          Tap any service card to see the pricing.
         </p>
 
 
-        <a
-          href="advertisement.html"
-          class="project-thumbnail">
-
-          <img
-            src="thumbnail%201.png"
-            alt="Advertisement Thumbnail"
-            loading="lazy"
-          >
-
-        </a>
+        <div class="services">
 
 
-        <a
-          href="advertisement.html"
-          class="click-here">
+          <div
+            class="service"
+            onclick="openPricing('video')">
 
-          CLICK HERE →
+            <h3>
+              🎬 Video Editing
+            </h3>
 
-        </a>
+            <p>
+              Professional video editing for your content.
+            </p>
+
+          </div>
+
+
+          <div
+            class="service"
+            onclick="openPricing('motion')">
+
+            <h3>
+              ✨ Motion Graphics
+            </h3>
+
+            <p>
+              Creative motion graphics and animations.
+            </p>
+
+          </div>
+
+
+          <div
+            class="service"
+            onclick="openPricing('advertisement')">
+
+            <h3>
+              📢 Advertisement
+            </h3>
+
+            <p>
+              Professional advertisements for brands.
+            </p>
+
+          </div>
+
+
+          <div
+            class="service"
+            onclick="openPricing('social')">
+
+            <h3>
+              📱 Social Media
+            </h3>
+
+            <p>
+              Reels and social media content packages.
+            </p>
+
+          </div>
+
+
+        </div>
 
       </div>
 
+    </section>
 
 
-      <!-- =====================
-           MOTION GRAPHICS CARD
-      ====================== -->
+    <!-- =========================
+         PORTFOLIO
+    ========================== -->
 
-      <div class="project">
+    <section id="work">
 
-        <h3>
-          Motion Graphics
-        </h3>
+      <div class="container">
 
-        <p>
-          Creative motion graphics and animation work.
+        <div class="section-label">
+          02 / PORTFOLIO
+        </div>
+
+        <h2>
+          Selected Work
+        </h2>
+
+        <p class="section-description">
+          A few examples of the type of content I create.
         </p>
 
 
-        <a
-          href="motion-graphics.html"
-          class="project-thumbnail">
+        <div class="portfolio">
 
-          <img
-            src="thumbnail%202.png"
-            alt="Motion Graphics Thumbnail"
-            loading="lazy"
-          >
 
-        </a>
+          <!-- VIDEO EDITING -->
 
+          <div class="project">
 
-        <a
-          href="motion-graphics.html"
-          class="click-here">
+            <h3>
+              Video Editing
+            </h3>
 
-          CLICK HERE →
+            <p>
+              Creative video editing projects.
+            </p>
 
-        </a>
+            <a
+              href="video-editing.html"
+              class="project-thumbnail">
 
-      </div>
+              <img
+                src="thumbnail%202.png"
+                alt="Video Editing Thumbnail"
+                loading="lazy"
+              >
 
+            </a>
 
-    </div>
+            <a
+              href="video-editing.html"
+              class="click-here">
 
-  </div>
+              CLICK HERE →
 
-</section>
+            </a>
 
+          </div>
 
 
-<!-- =========================
-     ABOUT
-========================= -->
+          <!-- ADVERTISEMENT -->
 
-<section id="about">
+          <div class="project">
 
-  <div class="container">
+            <h3>
+              Brand Advertisement
+            </h3>
 
-    <div class="section-number">
-      03 / ABOUT ME
-    </div>
+            <p>
+              Professional promotional video editing.
+            </p>
 
-    <h2 class="section-title">
-      About Me
-    </h2>
+            <a
+              href="advertisement.html"
+              class="project-thumbnail">
 
+              <img
+                src="thumbnail%201.png"
+                alt="Advertisement Thumbnail"
+                loading="lazy"
+              >
 
-    <div class="about-box">
+            </a>
 
-      <p>
+            <a
+              href="advertisement.html"
+              class="click-here">
 
-        I'm TubeGuide, a video editor and
-        creative content creator. I have a
-        YouTube channel with 1.9K+ subscribers
-        and I create engaging video edits,
-        motion graphics and promotional content.
+              CLICK HERE →
 
-        <br><br>
+            </a>
 
-        My focus is clean editing, strong
-        visuals, smooth pacing and content
-        that gets noticed.
+          </div>
 
-      </p>
 
-    </div>
+          <!-- MOTION GRAPHICS -->
 
-  </div>
+          <div class="project">
 
-</section>
+            <h3>
+              Motion Graphics
+            </h3>
 
+            <p>
+              Creative motion graphics and animation work.
+            </p>
 
+            <a
+              href="motion-graphics.html"
+              class="project-thumbnail">
 
-<!-- =========================
-     CONTACT
-========================= -->
+              <img
+                src="thumbnail%202.png"
+                alt="Motion Graphics Thumbnail"
+                loading="lazy"
+              >
 
-<section id="contact">
+            </a>
 
-  <div class="container">
+            <a
+              href="motion-graphics.html"
+              class="click-here">
 
-    <div class="section-number">
-      04 / CONTACT
-    </div>
+              CLICK HERE →
 
-    <h2 class="section-title">
-      Let's Work Together
-    </h2>
+            </a>
 
+          </div>
 
-    <div class="contact-box">
 
-      <p>
-        Have a project in mind?
-        Contact me and let's create
-        something great.
-      </p>
-
-
-      <div class="contact-buttons">
-
-        <a
-          href="#"
-          class="btn primary">
-
-          WhatsApp
-
-        </a>
-
-
-        <a
-          href="#"
-          class="btn">
-
-          Instagram
-
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  © 2026 IMAMEDITING.
-  All Rights Reserved.
-
-</footer>
-
-
-
-<!-- =========================
-     PRICING MODAL
-========================= -->
-
-<div
-  id="pricingModal"
-  class="pricing-modal">
-
-
-  <div class="pricing-box">
-
-
-    <button
-      class="close-pricing"
-      onclick="closePricing()">
-
-      ×
-
-    </button>
-
-
-    <div id="pricingContent"></div>
-
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-
-function openPricing(type){
-
-  const modal =
-    document.getElementById("pricingModal");
-
-  const content =
-    document.getElementById("pricingContent");
-
-  let html = "";
-
-
-  /* VIDEO EDITING */
-
-  if(type === "video"){
-
-    html = `
-
-      <h2 class="pricing-title">
-        🎬 VIDEO EDITING
-      </h2>
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Basic Editing
-        </div>
-
-        <div class="price">
-          ₹200–500
-        </div>
-
-        <div class="price-duration">
-          30–60 sec
         </div>
 
       </div>
 
+    </section>
 
-      <div class="price-item">
 
-        <div class="price-name">
-          Standard Editing
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-label">
+          03 / ABOUT ME
         </div>
 
-        <div class="price">
-          ₹300–600
-        </div>
-
-        <div class="price-duration">
-          30–60 sec
-        </div>
-
-      </div>
+        <h2>
+          About Me
+        </h2>
 
 
-      <div class="price-item">
+        <div class="about-box">
 
-        <div class="price-name">
-          Premium Editing
-        </div>
+          <p>
+            I'm TubeGuide, a video editor and creative
+            content creator. I have a YouTube channel with
+            1.9K+ subscribers and I create engaging video
+            edits, motion graphics and promotional content.
+          </p>
 
-        <div class="price">
-          ₹500–1,000
-        </div>
+          <p>
+            My focus is clean editing, strong visuals,
+            smooth pacing and content that gets noticed.
+          </p>
 
-        <div class="price-duration">
-          30–60 sec
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* MOTION GRAPHICS */
-
-  else if(type === "motion"){
-
-    html = `
-
-      <h2 class="pricing-title">
-        ✨ MOTION GRAPHICS
-      </h2>
-
-      <div class="price-item">
-
-        <div class="price-name">
-          Basic Motion Graphics
-        </div>
-
-        <div class="price">
-          ₹400–800
-        </div>
-
-        <div class="price-duration">
-          30–60 sec
         </div>
 
       </div>
 
+    </section>
 
-      <div class="price-item">
 
-        <div class="price-name">
-          Advanced Motion Graphics
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="section-label">
+          04 / CONTACT
         </div>
 
-        <div class="price">
-          ₹500–1,000
-        </div>
-
-        <div class="price-duration">
-          30–60 sec
-        </div>
-
-      </div>
+        <h2>
+          Let's Work Together
+        </h2>
 
 
-      <div class="price-item">
+        <div class="contact-box">
 
-        <div class="price-name">
-          Premium Motion Graphics
-        </div>
-
-        <div class="price">
-          ₹700–1,500
-        </div>
-
-        <div class="price-duration">
-          30–60 sec
-        </div>
-
-      </div>
-
-    `;
-
-  }
+          <p>
+            Have a project in mind?
+            Contact me and let's create something great.
+          </p>
 
 
-  /* ADVERTISEMENT */
+          <div class="contact-buttons">
 
-  else if(type === "advertisement"){
+            <a
+              href="#"
+              class="btn btn-primary">
 
-    html = `
+              WhatsApp
 
-      <h2 class="pricing-title">
-        📢 ADVERTISEMENT
-      </h2>
+            </a>
 
-      <div class="price-item">
 
-        <div class="price-name">
-          Basic Advertisement
-        </div>
+            <a
+              href="#"
+              class="btn btn-secondary">
 
-        <div class="price">
-          ₹399
+              Instagram
+
+            </a>
+
+          </div>
+
         </div>
 
       </div>
 
+    </section>
 
-      <div class="price-item">
-
-        <div class="price-name">
-          Professional Advertisement
-        </div>
-
-        <div class="price">
-          ₹599
-        </div>
-
-      </div>
+  </main>
 
 
-      <div class="price-item">
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
-      
+  <footer>
+
+    © 2026 IMAMEDITING. All Rights Reserved.
+
+  </footer>
+
+
+  <!-- =========================
+       PRICING MODAL
+  ======
