@@ -10,6 +10,10 @@
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 *{
   margin:0;
   padding:0;
@@ -31,7 +35,7 @@ body{
 
 
 /* =========================
-   ANIMATED BACKGROUND
+   BACKGROUND GLOW
 ========================= */
 
 body::before{
@@ -71,17 +75,29 @@ body::after{
 }
 
 @keyframes glowMove{
-  from{transform:translate(0,0);}
-  to{transform:translate(180px,150px);}
+  from{
+    transform:translate(0,0);
+  }
+
+  to{
+    transform:translate(180px,150px);
+  }
 }
 
 @keyframes glowMove2{
-  from{transform:translate(0,0);}
-  to{transform:translate(-150px,-120px);}
+  from{
+    transform:translate(0,0);
+  }
+
+  to{
+    transform:translate(-150px,-120px);
+  }
 }
 
 
-/* FLOATING LIGHTS */
+/* =========================
+   FLOATING LIGHTS
+========================= */
 
 .floating{
   position:fixed;
@@ -155,7 +171,7 @@ body::after{
 }
 
 section{
-  padding:80px 0;
+  padding:70px 0;
 }
 
 a{
@@ -173,6 +189,7 @@ a{
 .section-title{
   color:#fff;
   font-size:clamp(30px,6vw,48px);
+  line-height:1.1;
   margin-bottom:14px;
 }
 
@@ -221,6 +238,7 @@ header{
 
 .nav-links{
   display:flex;
+  align-items:center;
   gap:18px;
   font-size:14px;
 }
@@ -263,6 +281,7 @@ header{
 }
 
 .hero h1 span{
+  display:block;
   background:linear-gradient(
     135deg,
     #fff,
@@ -292,9 +311,7 @@ header{
   border:1px solid #333;
   border-radius:10px;
   background:#151515;
-  transition:
-    transform .3s ease,
-    box-shadow .3s ease;
+  transition:.3s ease;
 }
 
 .btn:hover{
@@ -318,14 +335,14 @@ header{
 
 .services{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:14px;
-  margin-top:40px;
+  margin-top:38px;
 }
 
 .service{
-  padding:25px;
   min-height:180px;
+  padding:25px;
   border:1px solid #292929;
   border-radius:18px;
   background:linear-gradient(
@@ -338,7 +355,7 @@ header{
 }
 
 .service:hover{
-  transform:translateY(-7px);
+  transform:translateY(-6px);
   border-color:#555;
   box-shadow:0 15px 40px rgba(80,60,255,.18);
 }
@@ -357,83 +374,102 @@ header{
    PORTFOLIO
 ========================= */
 
+#portfolio{
+  padding-top:65px;
+  padding-bottom:65px;
+}
+
 .portfolio{
+  width:100%;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:18px;
   margin-top:40px;
-  align-items:start;
+  align-items:stretch;
 }
 
 .project{
+  width:100%;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  padding:16px;
+  border:1px solid #292929;
+  border-radius:20px;
   background:linear-gradient(
     135deg,
     #1b1b1b,
     #0d0d0d
   );
-  border:1px solid #292929;
-  border-radius:20px;
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+  overflow:hidden;
   transition:.35s ease;
 }
 
 .project:hover{
-  transform:translateY(-6px);
+  transform:translateY(-5px);
   border-color:rgba(120,90,255,.6);
   box-shadow:0 15px 40px rgba(80,60,255,.18);
 }
 
 .project h3{
   font-size:21px;
+  line-height:1.25;
+  margin-bottom:8px;
 }
 
 .project p{
   color:#999;
   font-size:14px;
+  line-height:1.5;
+  margin-bottom:14px;
 }
 
 
 /* =========================
-   4 VIDEO PREVIEWS
+   THUMBNAIL
 ========================= */
 
-.video-preview-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
+.project-thumbnail{
+  display:block;
   width:100%;
+  cursor:pointer;
+  overflow:hidden;
+  border-radius:14px;
+  flex:1;
 }
 
-.preview-video{
-  width:100%;
-  aspect-ratio:16 / 10;
+.project-thumbnail img{
   display:block;
+  width:100%;
+  aspect-ratio:9 / 16;
   object-fit:cover;
-  background:#000;
-  border-radius:10px;
+  border-radius:14px;
+  transition:transform .35s ease;
+}
 
-  pointer-events:none;
+.project-thumbnail:hover img{
+  transform:scale(1.025);
 }
 
 
 /* =========================
-   CLICK HERE
+   CLICK HERE BUTTON
 ========================= */
 
 .click-here{
   display:block;
   width:100%;
-  text-align:center;
-  padding:12px;
+  margin-top:14px;
+  padding:13px 10px;
   border:1px solid #333;
-  border-radius:10px;
+  border-radius:11px;
   background:#151515;
+  text-align:center;
   color:#fff;
   font-size:14px;
-  font-weight:600;
+  font-weight:700;
+  letter-spacing:.3px;
   transition:.3s ease;
 }
 
@@ -447,6 +483,11 @@ header{
 /* =========================
    ABOUT
 ========================= */
+
+#about{
+  padding-top:55px;
+  padding-bottom:65px;
+}
 
 .about-box{
   margin-top:35px;
@@ -463,12 +504,17 @@ header{
 .about-box p{
   color:#aaa;
   font-size:16px;
+  line-height:1.8;
 }
 
 
 /* =========================
    CONTACT
 ========================= */
+
+#contact{
+  padding-top:65px;
+}
 
 .contact-box{
   margin-top:35px;
@@ -510,19 +556,19 @@ footer{
 
 
 /* =========================
-   PRICING POPUP
+   PRICING MODAL
 ========================= */
 
 .pricing-modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(8px);
   z-index:9999;
   padding:20px;
   align-items:center;
   justify-content:center;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);
 }
 
 .pricing-box{
@@ -530,11 +576,11 @@ footer{
   max-width:500px;
   max-height:85vh;
   overflow-y:auto;
-  background:#111;
+  position:relative;
+  padding:25px 20px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:20px;
-  padding:25px 20px;
-  position:relative;
+  background:#111;
   box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
 
@@ -547,6 +593,7 @@ footer{
   color:#fff;
   font-size:32px;
   cursor:pointer;
+  line-height:1;
 }
 
 .pricing-title{
@@ -588,98 +635,151 @@ footer{
 
 @media(max-width:700px){
 
-  .nav-links{
-    gap:10px;
-    font-size:12px;
+  section{
+    padding:60px 0;
   }
 
-  .services{
-    grid-template-columns:repeat(2,1fr);
+  .nav{
     gap:12px;
   }
 
-  .portfolio{
-    grid-template-columns:1fr;
-    gap:18px;
+  .logo{
+    font-size:16px;
+    gap:8px;
+  }
+
+  .logo img{
+    width:38px;
+    height:38px;
+  }
+
+  .nav-links{
+    gap:9px;
+    font-size:11px;
+  }
+
+  .hero{
+    min-height:72vh;
+  }
+
+  .hero h1{
+    font-size:clamp(40px,11vw,66px);
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .services{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
   }
 
   .service{
-    padding:20px 15px;
-    min-height:165px;
+    min-height:160px;
+    padding:18px 14px;
   }
 
   .service h3{
-    font-size:17px;
+    font-size:16px;
+    line-height:1.3;
   }
 
   .service p{
     font-size:12px;
+    line-height:1.5;
+  }
+
+  .portfolio{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin-top:32px;
   }
 
   .project{
-    padding:14px;
+    padding:12px;
+    border-radius:18px;
   }
 
   .project h3{
-    font-size:18px;
+    font-size:17px;
   }
 
   .project p{
-    font-size:13px;
+    font-size:12px;
   }
 
-  .video-preview-grid{
-    gap:7px;
+  .click-here{
+    font-size:11px;
+    padding:12px 5px;
   }
 
-  .preview-video{
-    border-radius:8px;
+  #about{
+    padding-top:55px;
   }
 
-  section{
-    padding:65px 0;
+  .about-box{
+    padding:24px 20px;
+  }
+
+  .about-box p{
+    font-size:15px;
   }
 
 }
 
 
-@media(max-width:420px){
+@media(max-width:380px){
 
   .logo{
-    font-size:16px;
+    font-size:14px;
   }
 
   .logo img{
-    width:36px;
-    height:36px;
+    width:34px;
+    height:34px;
   }
 
   .nav-links{
-    gap:7px;
+    gap:6px;
+    font-size:10px;
   }
 
-  .nav-links a{
-    font-size:11px;
+  .project{
+    padding:10px;
   }
 
-  .hero{
-    min-height:70vh;
-  }
-
-  .services{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .service{
-    padding:17px 12px;
-  }
-
-  .service h3{
+  .project h3{
     font-size:15px;
   }
 
-  .service p{
+  .project p{
     font-size:11px;
+  }
+
+  .click-here{
+    font-size:10px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL SCREEN
+========================= */
+
+@media(max-width:330px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .portfolio{
+    gap:10px;
+  }
+
+  .project{
+    padding:9px;
   }
 
 }
@@ -691,6 +791,8 @@ footer{
 
 <body>
 
+
+<!-- FLOATING LIGHTS -->
 
 <div class="floating one"></div>
 <div class="floating two"></div>
@@ -708,8 +810,9 @@ footer{
     <a href="#home" class="logo">
 
       <img
-      src="logo.png"
-      alt="Logo">
+        src="logo.png"
+        alt="IMAMEDITING Logo"
+      >
 
       <span>
         IMAMEDITING
@@ -743,17 +846,20 @@ footer{
 </header>
 
 
+<!-- =========================
+     MAIN
+========================= -->
 
 <main>
 
 
 <!-- =========================
-     HOME
+     HERO
 ========================= -->
 
 <section
-id="home"
-class="hero">
+  id="home"
+  class="hero">
 
   <div class="container">
 
@@ -765,9 +871,7 @@ class="hero">
 
       <h1>
         I EDIT VIDEOS
-        <span>
-          THAT GET NOTICED.
-        </span>
+        <span>THAT GET NOTICED.</span>
       </h1>
 
       <p>
@@ -781,15 +885,20 @@ class="hero">
       <div class="buttons">
 
         <a
-        href="#contact"
-        class="btn primary">
+          href="#contact"
+          class="btn primary">
+
           Work With Me
+
         </a>
 
+
         <a
-        href="#portfolio"
-        class="btn">
+          href="#portfolio"
+          class="btn">
+
           View My Work
+
         </a>
 
       </div>
@@ -826,9 +935,11 @@ class="hero">
     <div class="services">
 
 
+      <!-- VIDEO EDITING -->
+
       <div
-      class="service"
-      onclick="openPricing('video')">
+        class="service"
+        onclick="openPricing('video')">
 
         <h3>
           🎬 Video Editing
@@ -842,9 +953,11 @@ class="hero">
       </div>
 
 
+      <!-- MOTION GRAPHICS -->
+
       <div
-      class="service"
-      onclick="openPricing('motion')">
+        class="service"
+        onclick="openPricing('motion')">
 
         <h3>
           ✨ Motion Graphics
@@ -858,9 +971,11 @@ class="hero">
       </div>
 
 
+      <!-- ADVERTISEMENT -->
+
       <div
-      class="service"
-      onclick="openPricing('advertisement')">
+        class="service"
+        onclick="openPricing('advertisement')">
 
         <h3>
           📢 Advertisement
@@ -874,9 +989,11 @@ class="hero">
       </div>
 
 
+      <!-- SOCIAL MEDIA -->
+
       <div
-      class="service"
-      onclick="openPricing('social')">
+        class="service"
+        onclick="openPricing('social')">
 
         <h3>
           📱 Social Media
@@ -928,81 +1045,31 @@ class="hero">
 
       <div class="project">
 
-        <div>
+        <h3>
+          Brand Advertisement
+        </h3>
 
-          <h3>
-            Brand Advertisement
-          </h3>
-
-          <p>
-            Professional promotional
-            video editing.
-          </p>
-
-        </div>
-
-
-        <div class="video-preview-grid">
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="ugc%20advertisement.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="advertisement%202.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="advertisement%203.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="advertisement%204.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-        </div>
+        <p>
+          Professional promotional video editing.
+        </p>
 
 
         <a
-        href="advertisement.html"
-        class="click-here">
+          href="advertisement.html"
+          class="project-thumbnail">
+
+          <img
+            src="thumbnail%201.png"
+            alt="Advertisement Thumbnail"
+            loading="lazy"
+          >
+
+        </a>
+
+
+        <a
+          href="advertisement.html"
+          class="click-here">
 
           CLICK HERE →
 
@@ -1018,81 +1085,31 @@ class="hero">
 
       <div class="project">
 
-        <div>
+        <h3>
+          Motion Graphics
+        </h3>
 
-          <h3>
-            Motion Graphics
-          </h3>
-
-          <p>
-            Creative motion graphics
-            and animation work.
-          </p>
-
-        </div>
-
-
-        <div class="video-preview-grid">
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="Motion-graphic.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="motion%20graphic%202.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="motion%20graphic%203.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-          <video
-          class="preview-video"
-          muted
-          playsinline
-          preload="metadata">
-
-            <source
-            src="motion%20graphic%204.mp4"
-            type="video/mp4">
-
-          </video>
-
-
-        </div>
+        <p>
+          Creative motion graphics and animation work.
+        </p>
 
 
         <a
-        href="motion-graphics.html"
-        class="click-here">
+          href="motion-graphics.html"
+          class="project-thumbnail">
+
+          <img
+            src="thumbnail%202.png"
+            alt="Motion Graphics Thumbnail"
+            loading="lazy"
+          >
+
+        </a>
+
+
+        <a
+          href="motion-graphics.html"
+          class="click-here">
 
           CLICK HERE →
 
@@ -1181,8 +1198,8 @@ class="hero">
       <div class="contact-buttons">
 
         <a
-        href="#"
-        class="btn primary">
+          href="#"
+          class="btn primary">
 
           WhatsApp
 
@@ -1190,8 +1207,8 @@ class="hero">
 
 
         <a
-        href="#"
-        class="btn">
+          href="#"
+          class="btn">
 
           Instagram
 
@@ -1224,20 +1241,20 @@ class="hero">
 
 
 <!-- =========================
-     PRICING POPUP
+     PRICING MODAL
 ========================= -->
 
 <div
-id="pricingModal"
-class="pricing-modal">
+  id="pricingModal"
+  class="pricing-modal">
 
 
   <div class="pricing-box">
 
 
     <button
-    class="close-pricing"
-    onclick="closePricing()">
+      class="close-pricing"
+      onclick="closePricing()">
 
       ×
 
@@ -1253,23 +1270,25 @@ class="pricing-modal">
 
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-
-/* =========================
-   PRICING
-========================= */
 
 function openPricing(type){
 
   const modal =
-  document.getElementById("pricingModal");
+    document.getElementById("pricingModal");
 
   const content =
-  document.getElementById("pricingContent");
+    document.getElementById("pricingContent");
 
   let html = "";
 
+
+  /* VIDEO EDITING */
 
   if(type === "video"){
 
@@ -1280,45 +1299,61 @@ function openPricing(type){
       </h2>
 
       <div class="price-item">
+
         <div class="price-name">
           Basic Editing
         </div>
+
         <div class="price">
           ₹200–500
         </div>
+
         <div class="price-duration">
           30–60 sec
         </div>
+
       </div>
 
+
       <div class="price-item">
+
         <div class="price-name">
           Standard Editing
         </div>
+
         <div class="price">
           ₹300–600
         </div>
+
         <div class="price-duration">
           30–60 sec
         </div>
+
       </div>
 
+
       <div class="price-item">
+
         <div class="price-name">
           Premium Editing
         </div>
+
         <div class="price">
           ₹500–1,000
         </div>
+
         <div class="price-duration">
           30–60 sec
         </div>
+
       </div>
 
     `;
 
   }
 
+
+  /* MOTION GRAPHICS */
 
   else if(type === "motion"){
 
@@ -1329,45 +1364,61 @@ function openPricing(type){
       </h2>
 
       <div class="price-item">
+
         <div class="price-name">
           Basic Motion Graphics
         </div>
+
         <div class="price">
           ₹400–800
         </div>
+
         <div class="price-duration">
           30–60 sec
         </div>
+
       </div>
 
+
       <div class="price-item">
+
         <div class="price-name">
           Advanced Motion Graphics
         </div>
+
         <div class="price">
           ₹500–1,000
         </div>
+
         <div class="price-duration">
           30–60 sec
         </div>
+
       </div>
 
+
       <div class="price-item">
+
         <div class="price-name">
           Premium Motion Graphics
         </div>
+
         <div class="price">
           ₹700–1,500
         </div>
+
         <div class="price-duration">
           30–60 sec
         </div>
+
       </div>
 
     `;
 
   }
 
+
+  /* ADVERTISEMENT */
 
   else if(type === "advertisement"){
 
@@ -1378,23 +1429,31 @@ function openPricing(type){
       </h2>
 
       <div class="price-item">
+
         <div class="price-name">
           Basic Advertisement
         </div>
+
         <div class="price">
           ₹399
         </div>
+
       </div>
 
+
       <div class="price-item">
+
         <div class="price-name">
           Professional Advertisement
         </div>
+
         <div class="price">
           ₹599
         </div>
+
       </div>
 
+
       <div class="price-item">
-        <div class="price-name">
-  
+
+      
