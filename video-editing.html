@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Video Editing | IMAMEDITING</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#080808;
+      color:#fff;
+      font-family:Arial,Helvetica,sans-serif;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      width:450px;
+      height:450px;
+      top:-150px;
+      left:-150px;
+      background:radial-gradient(
+        circle,
+        rgba(100,70,255,.25),
+        transparent 70%
+      );
+      filter:blur(40px);
+      animation:glowMove 8s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      width:400px;
+      height:400px;
+      right:-150px;
+      bottom:-100px;
+      background:radial-gradient(
+        circle,
+        rgba(0,180,255,.20),
+        transparent 70%
+      );
+      filter:blur(40px);
+      animation:glowMove2 10s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    @keyframes glowMove{
+      from{
+        transform:translate(0,0);
+      }
+      to{
+        transform:translate(180px,150px);
+      }
+    }
+
+    @keyframes glowMove2{
+      from{
+        transform:translate(0,0);
+      }
+      to{
+        transform:translate(-150px,-120px);
+      }
+    }
+
+    .container{
+      width:100%;
+      max-width:1100px;
+      margin:auto;
+      padding:25px 20px 50px;
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:45px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:20px;
+      font-weight:bold;
+    }
+
+    .logo img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      border-radius:50%;
+    }
+
+    .back{
+      color:#fff;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:bold;
+    }
+
+    .page-title{
+      text-align:center;
+      font-size:38px;
+      margin-bottom:45px;
+      letter-spacing:1px;
+    }
+
+    .category-title{
+      text-align:center;
+      font-size:24px;
+      margin-bottom:25px;
+    }
+
+    .videos{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:20px;
+      align-items:stretch;
+    }
+
+    .video-card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:10px;
+      overflow:hidden;
+    }
+
+    .video-card video{
+      width:100%;
+      aspect-ratio:9 / 16;
+      display:block;
+      object-fit:cover;
+      border-radius:12px;
+      background:#000;
+    }
+
+    .video-name{
+      font-size:15px;
+      text-align:center;
+      margin:14px 5px 5px;
+      font-weight:bold;
+    }
+
+    @media(max-width:600px){
+
+      .container{
+        padding:20px 14px 40px;
+      }
+
+      .page-title{
+        font-size:30px;
+        margin-bottom:40px;
+      }
+
+      .category-title{
+        font-size:21px;
+        margin-bottom:20px;
+      }
+
+      .videos{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+      }
+
+      .video-card{
+        padding:7px;
+        border-radius:14px;
+      }
+
+      .video-card video{
+        border-radius:10px;
+      }
+
+      .video-name{
+        font-size:12px;
+        margin-top:10px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="top">
+
+      <div class="logo">
+        <img src="logo.png" alt="Logo">
+        <span>IMAMEDITING</span>
+      </div>
+
+      <a href="index.html" class="back">
+        ← Back
+      </a>
+
+    </div>
+
+
+    <h1 class="page-title">
+      VIDEO EDITING
+    </h1>
+
+
+    <h2 class="category-title">
+      INTERIOR DESIGN EDIT
+    </h2>
+
+
+    <div class="videos">
+
+      <div class="video-card">
+
+        <video
+          controls
+          playsinline
+          preload="metadata">
+
+          <source
+            src="interior%201.mp4"
+            type="video/mp4">
+
+        </video>
+
+        <div class="video-name">
+          Interior Design Edit 01
+        </div>
+
+      </div>
+
+
+      <div class="video-card">
+
+        <video
+          controls
+          playsinline
+          preload="metadata">
+
+          <source
+            src="interior%202.mp4"
+            type="video/mp4">
+
+        </video>
+
+        <div class="video-name">
+          Interior Design Edit 02
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
