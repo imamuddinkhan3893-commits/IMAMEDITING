@@ -1175,3 +1175,286 @@
   <!-- =========================
        PRICING MODAL
   ======
+  
+<!-- =========================
+     PRICING MODAL
+========================= -->
+
+<div id="pricingModal">
+
+  <div class="pricing-box">
+
+    <button
+      class="close-pricing"
+      onclick="closePricing()">
+      ×
+    </button>
+
+    <div id="pricingContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function openPricing(type){
+
+  const modal = document.getElementById("pricingModal");
+  const content = document.getElementById("pricingContent");
+
+  let html = "";
+
+
+  /* VIDEO EDITING */
+
+  if(type === "video"){
+
+    html = `
+      <h2 class="pricing-title">
+        🎬 VIDEO EDITING
+      </h2>
+
+      <div class="price-item">
+        <div class="price-name">
+          Basic Editing
+        </div>
+
+        <div class="price">
+          ₹200–500
+        </div>
+
+        <div class="price-duration">
+          30–60 sec
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Standard Editing
+        </div>
+
+        <div class="price">
+          ₹300–600
+        </div>
+
+        <div class="price-duration">
+          30–60 sec
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Premium Editing
+        </div>
+
+        <div class="price">
+          ₹500–1,000
+        </div>
+
+        <div class="price-duration">
+          30–60 sec
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  /* MOTION GRAPHICS */
+
+  else if(type === "motion"){
+
+    html = `
+      <h2 class="pricing-title">
+        ✨ MOTION GRAPHICS
+      </h2>
+
+      <div class="price-item">
+        <div class="price-name">
+          Basic Motion Graphics
+        </div>
+
+        <div class="price">
+          ₹400–800
+        </div>
+
+        <div class="price-duration">
+          30–60 sec
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Advanced Motion Graphics
+        </div>
+
+        <div class="price">
+          ₹500–1,000
+        </div>
+
+        <div class="price-duration">
+          30–60 sec
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Premium Motion Graphics
+        </div>
+
+        <div class="price">
+          ₹700–1,500
+        </div>
+
+        <div class="price-duration">
+          30–60 sec
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  /* ADVERTISEMENT */
+
+  else if(type === "advertisement"){
+
+    html = `
+      <h2 class="pricing-title">
+        📢 ADVERTISEMENT
+      </h2>
+
+      <div class="price-item">
+        <div class="price-name">
+          Basic Advertisement
+        </div>
+
+        <div class="price">
+          ₹399
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Professional Advertisement
+        </div>
+
+        <div class="price">
+          ₹599
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Premium Advertisement
+        </div>
+
+        <div class="price">
+          ₹799
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  /* SOCIAL MEDIA */
+
+  else if(type === "social"){
+
+    html = `
+      <h2 class="pricing-title">
+        📱 SOCIAL MEDIA
+      </h2>
+
+      <div class="price-item">
+        <div class="price-name">
+          Reel / Short
+        </div>
+
+        <div class="price">
+          ₹3000/week
+        </div>
+
+        <div class="price-duration">
+          1 reel or short daily
+        </div>
+      </div>
+
+      <div class="price-item">
+        <div class="price-name">
+          Social Media Package
+        </div>
+
+        <div class="price">
+          ₹9999/month
+        </div>
+
+        <div class="price-duration">
+          1 reel per day
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  content.innerHTML = html;
+
+  modal.style.display = "flex";
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closePricing(){
+
+  const modal = document.getElementById("pricingModal");
+
+  modal.style.display = "none";
+
+  document.body.style.overflow = "";
+
+}
+
+
+/* OUTSIDE CLICK */
+
+document
+  .getElementById("pricingModal")
+  .addEventListener("click", function(event){
+
+    if(event.target === this){
+
+      closePricing();
+
+    }
+
+  });
+
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown", function(event){
+
+  if(event.key === "Escape"){
+
+    closePricing();
+
+  }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
